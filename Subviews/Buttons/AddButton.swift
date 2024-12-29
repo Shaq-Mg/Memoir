@@ -1,5 +1,5 @@
 //
-//  CreateButton.swift
+//  AddButton.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 28/12/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CreateButton: View {
+struct AddButton: View {
     var body: some View {
         VStack {
             Image(systemName: "plus")
@@ -20,5 +20,5 @@ struct CreateButton: View {
 }
 
 #Preview {
-    CreateButton()
+    AddButton()
 }
