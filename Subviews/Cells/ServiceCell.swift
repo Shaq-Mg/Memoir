@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct ServiceCell: View {
+    let service: Service
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text(service.title)
+                .font(.headline)
+            Spacer()
+            VStack(alignment: .trailing, spacing: 2) {
+                Text("Price: £\(service.price)")
+                    .foregroundStyle(.black)
+                Text("\(service.duration) mins")
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        }
     }
 }
 
 #Preview {
-    ServiceCell()
+    ServiceCell(service: Preview.dev.service)
 }

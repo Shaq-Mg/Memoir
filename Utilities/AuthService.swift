@@ -1,5 +1,5 @@
 //
-//  AuthManager.swift
+//  AuthService.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 27/12/2024.
@@ -10,6 +10,12 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class AuthService {
+    
+    let userCollection = Firestore.firestore().collection("users")
+    
+    func userDocument(userId: String) -> DocumentReference {
+        userCollection.document(userId)
+    }
     
     func signInUser(email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
@@ -45,7 +51,7 @@ final class AuthService {
     }
     
     func updatePremiumStatus(userId: String, isPremium: Bool) async throws {
-        let data: [String:Any] = [ AuthUser.CodingKeys.isPremium.rawValue : isPremium ]
+        let data: [String:Any] = [ User.CodingKeys.isPremium.rawValue : isPremium ]
         try await Firestore.firestore().document(userId).updateData(data)
     }
 }

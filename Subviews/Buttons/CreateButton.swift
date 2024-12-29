@@ -9,7 +9,13 @@ import SwiftUI
 
 struct CreateButton: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Image(systemName: "plus")
+                .font(.system(size: 10, weight: .bold))
+                .padding(4)
+                .overlay(Circle().stroke(lineWidth: 3))
+                .foregroundStyle(Color(.darkGray))
+        }
     }
 }
 

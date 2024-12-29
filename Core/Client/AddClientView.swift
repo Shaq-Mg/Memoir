@@ -1,5 +1,5 @@
 //
-//  CreateClientView.swift
+//  AddClientView.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 28/12/2024.
@@ -12,18 +12,19 @@ struct AddClientView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack(spacing: 14) {
-            headerView
+        VStack(spacing: 18) {
+            addClientHeader
             
             Text("Add Client")
-                .font(.largeTitle)
+                .font(.system(size: 32, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 32)
             
             CreateTextfield(text: $viewModel.name, title: "Name", placeholder: "Name")
             CreateTextfield(text: $viewModel.phoneNumber, title: "Phone number", placeholder: "Phone number")
             CreateTextfield(text: $viewModel.nickname, title: "Nickname", placeholder: "Nickname")
             Toggle("Favourite", isOn: $viewModel.isFavourite)
-                .tint(.indigo)
+                .tint(Color.icon)
             
             Button {
                 if !viewModel.name.isEmpty && !viewModel.phoneNumber.isEmpty {
@@ -33,10 +34,13 @@ struct AddClientView: View {
             } label: {
                 Text("Add")
                     .font(.headline)
-                    .foregroundStyle(.white)
-                    .padding()
+                    .foregroundStyle(Color.dark)
+                    .padding(12)
                     .frame(maxWidth: .infinity)
                     .background(Color("icon"))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .shadow(radius: 4)
+                    .padding(.top, 44)
             }
             Spacer()
         }
@@ -52,7 +56,7 @@ struct AddClientView: View {
 }
 
 extension AddClientView {
-    private var headerView: some View {
+    private var addClientHeader: some View {
         HStack(alignment: .top) {
             Button {
                 dismiss()
@@ -63,7 +67,7 @@ extension AddClientView {
             Spacer()
             ReusableCapsule()
             Spacer()
-            Text("     ")
+            Text("      ")
             
         }
         .font(.headline)

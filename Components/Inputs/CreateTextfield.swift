@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct CreateTextfield: View {
+    @Binding var text: String
+    let title: String
+    let placeholder: String
+    var isDecimal = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 8) {
+            if isDecimal {
+                Text(title)
+                    .font(.caption)
+                TextField(placeholder, text: $text)
+                    .keyboardType(.decimalPad)
+                Divider()
+            } else {
+                Text(title)
+                    .font(.caption)
+                TextField(placeholder, text: $text)
+                Divider()
+            }
+        }
     }
 }
 
 #Preview {
-    CreateTextfield()
+    CreateTextfield(text: .constant(""), title: "Phone number", placeholder: "")
 }

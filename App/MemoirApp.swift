@@ -6,12 +6,31 @@
 //
 
 import SwiftUI
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
+}
 
 @main
 struct MemoirApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var authViewModel = AuthenticationViewModel()
+    @StateObject private var clientViewModel = ClientViewModel()
+    @StateObject private var serviceViewModel = ServiceViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                HomeView()
+                    .environmentObject(authViewModel)
+                    .environmentObject(clientViewModel)
+                    .environmentObject(serviceViewModel)
+            }
         }
     }
 }
