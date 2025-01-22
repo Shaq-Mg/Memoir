@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @State private var isMenuShowing = false
     var body: some View {
-        ClientView(showSideMenu: $isMenuShowing)
+        ServiceView(showSideMenu: $isMenuShowing)
     }
 }
 

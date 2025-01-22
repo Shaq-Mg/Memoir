@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import FirebaseFirestore
+
+struct Day: Identifiable, Hashable {
+    @DocumentID var id: String?
+    let booking: Int
+    let date: Date
+
+}

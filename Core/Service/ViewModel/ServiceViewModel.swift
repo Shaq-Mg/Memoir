@@ -10,7 +10,6 @@ import Firebase
 
 final class ServiceViewModel: ObservableObject {
     @Published var services = [Service]()
-//    @Published var service: Service? = nil
     @Published var searchText = ""
     @Published var title = ""
     @Published var price = ""
@@ -23,7 +22,7 @@ final class ServiceViewModel: ObservableObject {
     
     private var serviceListener: ListenerRegistration? = nil
     
-    private let manager = FirebaseManager.shared
+    private let manager = AuthService.shared
     
     init() {
         self.fetchServicesWithListener()
@@ -42,7 +41,7 @@ final class ServiceViewModel: ObservableObject {
     
     func fetchServicesWithListener() {
         guard let uid = manager.userSession?.uid else { return }
-        self.serviceListener = manager.userDocument(userId: uid).collection("services").order(by: Service.CodingKeys.title.rawValue) // Optional: sort by a field
+        self.serviceListener = FirebaseManager.userDocument(userId: uid).collection("services").order(by: Service.CodingKeys.title.rawValue) // Optional: sort by a field
             .addSnapshotListener { [weak self] (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents found")
@@ -56,14 +55,14 @@ final class ServiceViewModel: ObservableObject {
     func add(title: String, price: String, duration: String) {
         guard let uid = manager.userSession?.uid else { return }
         Task {
-            try await manager.create(collectionPath: "services", userId: uid, documentData: [Service.CodingKeys.title.rawValue: title, Service.CodingKeys.price.rawValue: price, Service.CodingKeys.duration.rawValue: duration])
+            try await FirebaseManager.create(collectionPath: "services", userId: uid, documentData: [Service.CodingKeys.title.rawValue: title, Service.CodingKeys.price.rawValue: price, Service.CodingKeys.duration.rawValue: duration])
         }
         self.clearServiceInformation()
     }
     
     func update(serviceToUpdate: Service) {
         guard let uid = manager.userSession?.uid else { return }
-        manager.userCollection.document(uid).collection("services").document(serviceToUpdate.id ?? "").setData([Service.CodingKeys.title.rawValue: serviceToUpdate.title, Service.CodingKeys.price.rawValue: serviceToUpdate.price, Service.CodingKeys.duration.rawValue: serviceToUpdate.duration,], merge: true)
+        FirebaseManager.userCollection.document(uid).collection("services").document(serviceToUpdate.id ?? "").setData([Service.CodingKeys.title.rawValue: serviceToUpdate.title, Service.CodingKeys.price.rawValue: serviceToUpdate.price, Service.CodingKeys.duration.rawValue: serviceToUpdate.duration,], merge: true)
     }
     
     func delete(at offsets: IndexSet) {
@@ -71,7 +70,7 @@ final class ServiceViewModel: ObservableObject {
         offsets.forEach { index in
             let service = services[index]
             if let serviceID = service.id {
-                manager.delete(uid: uid, collectionPath: "services", docToDelete: serviceID)
+                FirebaseManager.delete(uid: uid, collectionPath: "services", docToDelete: serviceID)
             }
         }
     }

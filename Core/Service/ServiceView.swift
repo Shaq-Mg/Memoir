@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ServiceView: View {
     @EnvironmentObject private var viewModel: ServiceViewModel
-    @State private var isShowNewService = false
+    @State private var showAddServiceView = false
     @Binding var showSideMenu: Bool
     
     var body: some View {
@@ -19,7 +19,6 @@ struct ServiceView: View {
             if viewModel.filteredServices.isEmpty {
                 Text("No services available")
                     .font(.title2)
-                    .fontWeight(.semibold)
                 Spacer()
             } else {
                 List {
@@ -39,7 +38,7 @@ struct ServiceView: View {
             }
         }
         .onAppear { viewModel.fetchServicesWithListener() }
-        .sheet(isPresented: $isShowNewService) {
+        .sheet(isPresented: $showAddServiceView) {
             NavigationStack {
                 AddServiceView()
             }
@@ -48,11 +47,12 @@ struct ServiceView: View {
             HStack {
                 SearchBarView(searchText: $viewModel.searchText)
                 Button {
-                    isShowNewService.toggle()
+                    showAddServiceView.toggle()
                 } label: {
-                        AddServiceView()
+                    AddButton()
                 }
             }
+            .padding(.horizontal)
         })
     }
 }

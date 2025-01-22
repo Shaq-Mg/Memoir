@@ -40,7 +40,7 @@ struct ClientView: View {
                     }
                 } label: {
                     HStack {
-                        CreateButton()
+                        AddButton()
                             .padding()
                     }
                 }

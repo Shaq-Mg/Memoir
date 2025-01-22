@@ -26,7 +26,7 @@ final class ClientViewModel: ObservableObject {
         return clients.filter({ $0.name.localizedCaseInsensitiveContains(searchText)})
     }
     
-    let manager = FirebaseManager.shared
+    let dataService = AuthService.shared
     
     init() {
         self.fetchClientsWithListener()
@@ -44,8 +44,8 @@ final class ClientViewModel: ObservableObject {
     }
     
     func fetchClientsWithListener() {
-        guard let uid = manager.userSession?.uid else { return }
-        self.clientListener = manager.userDocument(userId: uid).collection("clients").order(by: Client.CodingKeys.name.rawValue) // Optional: sort by a field
+        guard let uid = dataService.userSession?.uid else { return }
+        self.clientListener = FirebaseManager.userDocument(userId: uid).collection("clients").order(by: Client.CodingKeys.name.rawValue) // Optional: sort by a field
             .addSnapshotListener { [weak self] (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents found")
@@ -57,9 +57,9 @@ final class ClientViewModel: ObservableObject {
     }
     
     func fetchFavouriteClients() {
-        guard let uid = manager.userSession?.uid else { return }
+        guard let uid = dataService.userSession?.uid else { return }
         
-        manager.userDocument(userId: uid).collection("users")
+        FirebaseManager.userDocument(userId: uid).collection("users")
             .whereField(Client.CodingKeys.isFavourite.rawValue, isEqualTo: true).getDocuments { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No client documents: \(error?.localizedDescription ?? "Unknown error")")
@@ -72,24 +72,24 @@ final class ClientViewModel: ObservableObject {
     }
     
     func create(name: String, phoneNumber: String, nickname: String?, isFavourite: Bool) {
-        guard let uid = manager.userSession?.uid else { return }
+        guard let uid = dataService.userSession?.uid else { return }
         Task {
-            try await manager.create(collectionPath: "clients", userId: uid, documentData: [Client.CodingKeys.name.rawValue: name, Client.CodingKeys.phoneNumber.rawValue: phoneNumber, Client.CodingKeys.nickname.rawValue: nickname ?? "n/a", Client.CodingKeys.isFavourite.rawValue: isFavourite])
+            try await FirebaseManager.create(collectionPath: "clients", userId: uid, documentData: [Client.CodingKeys.name.rawValue: name, Client.CodingKeys.phoneNumber.rawValue: phoneNumber, Client.CodingKeys.nickname.rawValue: nickname ?? "n/a", Client.CodingKeys.isFavourite.rawValue: isFavourite])
         }
         self.clearInformation()
     }
     
     func update(clientToUpdate: Client) {
-        guard let uid = manager.userSession?.uid else { return }
-        manager.userCollection.document(uid).collection("clients").document(clientToUpdate.id ?? "").setData(["name": clientToUpdate.name, "phone_number": clientToUpdate.phoneNumber,"nickname": clientToUpdate.nickname ?? "n/a", "is_favourite": clientToUpdate.isFavourite], merge: true)
+        guard let uid = dataService.userSession?.uid else { return }
+        FirebaseManager.userCollection.document(uid).collection("clients").document(clientToUpdate.id ?? "").setData(["name": clientToUpdate.name, "phone_number": clientToUpdate.phoneNumber,"nickname": clientToUpdate.nickname ?? "n/a", "is_favourite": clientToUpdate.isFavourite], merge: true)
     }
     
     func delete(at offsets: IndexSet) {
-        guard let uid = manager.userSession?.uid else { return }
+        guard let uid = dataService.userSession?.uid else { return }
         offsets.forEach { index in
             let client = clients[index]
             if let clientID = client.id {
-                manager.delete(uid: uid, collectionPath: "clients", docToDelete: clientID)
+                FirebaseManager.delete(uid: uid, collectionPath: "clients", docToDelete: clientID)
             }
         }
     }

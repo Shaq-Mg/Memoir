@@ -10,13 +10,13 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class AuthService {
+    @Published var userSession: FirebaseAuth.User?
+    @Published var currentUser: User?
     
-    let userCollection = Firestore.firestore().collection("users")
+    static let shared = AuthService()
     
-    func userDocument(userId: String) -> DocumentReference {
-        userCollection.document(userId)
-    }
-    
+    private init() {  }
+   
     func signInUser(email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
     }

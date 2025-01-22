@@ -11,29 +11,24 @@ import Firebase
 import Combine
 
 final class FirebaseManager {
-    @Published var availableTimes = [Date]()
-    @Published var userSession: FirebaseAuth.User?
-    @Published var user: User? = nil
-    
-    static let shared = FirebaseManager()
-    let userCollection = Firestore.firestore().collection("users")
+    static let userCollection = Firestore.firestore().collection("users")
     
     private init() { }
     
-    func userDocument(userId: String) -> DocumentReference {
+    static func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
     }
     
-    func create(collectionPath: String, userId: String, documentData: [String:Any]) async throws {
+    static func create(collectionPath: String, userId: String, documentData: [String:Any]) async throws {
         let document = userDocument(userId: userId).collection(collectionPath).document()
         try await document.setData(documentData, merge: false)
     }
     
-    func update<T: Identifiable>(collectionPath: String, uid: String, typeToUpdate: T, typeDictionary: [String:Any]) {
+    static func update<T: Identifiable>(collectionPath: String, uid: String, typeToUpdate: T, typeDictionary: [String:Any]) {
         userDocument(userId: uid).collection(collectionPath).document("\(typeToUpdate.id)").updateData(typeDictionary)
     }
     
-    func delete(uid: String, collectionPath: String, docToDelete: String) {
+    static func delete(uid: String, collectionPath: String, docToDelete: String) {
         userDocument(userId: uid).collection(collectionPath).document(docToDelete).delete { error in
             if let error = error {
                 print("Failed to delete document from database \(error)")

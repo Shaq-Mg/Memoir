@@ -11,9 +11,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class AuthenticationViewModel: ObservableObject {
-    @Published var userSession: FirebaseAuth.User?
-    @Published var currentUser: User?
-    
     @Published var selectedItem: PhotosPickerItem? = nil
     @Published var selectedImageData: Data? = nil
     @Published var fileURL: URL? = nil
@@ -25,11 +22,11 @@ final class AuthenticationViewModel: ObservableObject {
     @Published var profileImageUrl = ""
     @Published var errorMessage = ""
     
-    let authService = AuthService()
+    let dataService = AuthService.shared
     
     init() {
         DispatchQueue.main.async {
-            self.userSession = Auth.auth().currentUser
+            self.dataService.userSession = Auth.auth().currentUser
         }
         
         Task {
@@ -51,10 +48,10 @@ final class AuthenticationViewModel: ObservableObject {
     func createUser(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
-            self.userSession = result.user
+            self.dataService.userSession = result.user
             let user = User(id: result.user.uid, name: name, email: email, imageUrl: profileImageUrl)
             let encodedUser = try Firestore.Encoder().encode(user)
-            try await authService.userDocument(userId: user.id).setData(encodedUser)
+            try await FirebaseManager.userDocument(userId: user.id).setData(encodedUser)
             self.persistImageToFileManager()
             await fetchUser()
         } catch {
@@ -65,7 +62,7 @@ final class AuthenticationViewModel: ObservableObject {
     func signIn(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            self.userSession = result.user
+            self.dataService.userSession = result.user
             await fetchUser()
         } catch {
             errorMessage = "Failed to login user with error \(error.localizedDescription)"
@@ -74,15 +71,15 @@ final class AuthenticationViewModel: ObservableObject {
     
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let snapshot = try? await authService.userDocument(userId: uid).getDocument() else { return }
-        self.currentUser = try? snapshot.data(as: User.self)
+        guard let snapshot = try? await FirebaseManager.userDocument(userId: uid).getDocument() else { return }
+        dataService.currentUser = try? snapshot.data(as: User.self)
     }
     
     func signOut() {
         do {
             try Auth.auth().signOut() // signs out user on backend
-            self.userSession = nil // wipes out user session and takes us back to login screen
-            self.currentUser = nil // wipes out current user data model
+            dataService.userSession = nil // wipes out user session and takes us back to login screen
+            dataService.currentUser = nil // wipes out current user data model
         } catch {
             errorMessage = "Failed to sign out user with error \(error.localizedDescription)"
         }
