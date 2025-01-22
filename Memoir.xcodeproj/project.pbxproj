@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		460FC6B92D416F7100EC1C44 /* InputDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460FC6B82D416F7100EC1C44 /* InputDetailView.swift */; };
 		461DEB812D20B0B7007D3326 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB802D20B0B7007D3326 /* MainHeaderView.swift */; };
 		461DEB832D20B230007D3326 /* AddClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB822D20B230007D3326 /* AddClientView.swift */; };
 		461DEB862D20B2D8007D3326 /* CreateTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB852D20B2D8007D3326 /* CreateTextfield.swift */; };
@@ -14,11 +15,11 @@
 		461DEB8A2D20B4C8007D3326 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB892D20B4C8007D3326 /* SearchBarView.swift */; };
 		461DEB8D2D20B520007D3326 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB8C2D20B520007D3326 /* AddButton.swift */; };
 		461DEB8F2D20BF02007D3326 /* ClientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB8E2D20BF02007D3326 /* ClientDetailView.swift */; };
-		461DEB912D20BFD7007D3326 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB902D20BFD7007D3326 /* DetailView.swift */; };
 		461DEB942D20C204007D3326 /* ClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB932D20C204007D3326 /* ClientCell.swift */; };
 		4644AFF22D20A65500B43C3B /* ClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4644AFF12D20A65500B43C3B /* ClientView.swift */; };
 		4644AFF52D20A6B200B43C3B /* ClientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4644AFF42D20A6B200B43C3B /* ClientViewModel.swift */; };
 		4644AFF82D20A71800B43C3B /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4644AFF72D20A71800B43C3B /* Client.swift */; };
+		464CACC02D419A5D00B9B0A0 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CACBF2D419A5D00B9B0A0 /* Appointment.swift */; };
 		467E56CB2D21BB1A00F756F5 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467E56CA2D21BB1A00F756F5 /* Service.swift */; };
 		467E56CE2D21BC1F00F756F5 /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467E56CD2D21BC1F00F756F5 /* ServiceViewModel.swift */; };
 		467E56D02D21BD6100F756F5 /* AddServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467E56CF2D21BD6100F756F5 /* AddServiceView.swift */; };
@@ -47,7 +48,6 @@
 		468289D42D1F6C2000C0CB87 /* FormIsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468289D32D1F6C2000C0CB87 /* FormIsValid.swift */; };
 		469027382D21D9AE00FD4223 /* ChartState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469027372D21D9AE00FD4223 /* ChartState.swift */; };
 		4690273C2D21DCBB00FD4223 /* ApptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4690273B2D21DCBB00FD4223 /* ApptService.swift */; };
-		4690273E2D21DD7300FD4223 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4690273D2D21DD7300FD4223 /* Appointment.swift */; };
 		469027422D21EBC700FD4223 /* ApptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469027412D21EBC700FD4223 /* ApptViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		460FC6B82D416F7100EC1C44 /* InputDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDetailView.swift; sourceTree = "<group>"; };
 		461DEB802D20B0B7007D3326 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		461DEB822D20B230007D3326 /* AddClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClientView.swift; sourceTree = "<group>"; };
 		461DEB852D20B2D8007D3326 /* CreateTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTextfield.swift; sourceTree = "<group>"; };
@@ -76,11 +77,11 @@
 		461DEB892D20B4C8007D3326 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		461DEB8C2D20B520007D3326 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		461DEB8E2D20BF02007D3326 /* ClientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDetailView.swift; sourceTree = "<group>"; };
-		461DEB902D20BFD7007D3326 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		461DEB932D20C204007D3326 /* ClientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientCell.swift; sourceTree = "<group>"; };
 		4644AFF12D20A65500B43C3B /* ClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientView.swift; sourceTree = "<group>"; };
 		4644AFF42D20A6B200B43C3B /* ClientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewModel.swift; sourceTree = "<group>"; };
 		4644AFF72D20A71800B43C3B /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		464CACBF2D419A5D00B9B0A0 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		467E56CA2D21BB1A00F756F5 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		467E56CD2D21BC1F00F756F5 /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
 		467E56CF2D21BD6100F756F5 /* AddServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServiceView.swift; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 		468289D32D1F6C2000C0CB87 /* FormIsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormIsValid.swift; sourceTree = "<group>"; };
 		469027372D21D9AE00FD4223 /* ChartState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartState.swift; sourceTree = "<group>"; };
 		4690273B2D21DCBB00FD4223 /* ApptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApptService.swift; sourceTree = "<group>"; };
-		4690273D2D21DD7300FD4223 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		469027412D21EBC700FD4223 /* ApptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApptViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,7 +265,6 @@
 		468289572D1F41CC00C0CB87 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				461DEB902D20BFD7007D3326 /* DetailView.swift */,
 				461DEB8B2D20B50D007D3326 /* Buttons */,
 				461DEB922D20C1E5007D3326 /* Cells */,
 				461DEB7F2D20B07F007D3326 /* Headers */,
@@ -286,6 +285,7 @@
 		468289592D1F41DD00C0CB87 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				464CACBF2D419A5D00B9B0A0 /* Appointment.swift */,
 				4644AFF72D20A71800B43C3B /* Client.swift */,
 				467E56CA2D21BB1A00F756F5 /* Service.swift */,
 				4682895C2D1F41F600C0CB87 /* Auth */,
@@ -368,6 +368,7 @@
 			children = (
 				461DEB852D20B2D8007D3326 /* CreateTextfield.swift */,
 				468289B52D1F68E700C0CB87 /* InputView.swift */,
+				460FC6B82D416F7100EC1C44 /* InputDetailView.swift */,
 			);
 			path = Inputs;
 			sourceTree = "<group>";
@@ -375,7 +376,6 @@
 		469027362D21D99900FD4223 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				4690273D2D21DD7300FD4223 /* Appointment.swift */,
 				469027372D21D9AE00FD4223 /* ChartState.swift */,
 			);
 			path = Chart;
@@ -560,7 +560,6 @@
 				469027382D21D9AE00FD4223 /* ChartState.swift in Sources */,
 				4682897D2D1F5F2C00C0CB87 /* AuthenticationViewModel.swift in Sources */,
 				468289BA2D1F6A2800C0CB87 /* LoginView.swift in Sources */,
-				461DEB912D20BFD7007D3326 /* DetailView.swift in Sources */,
 				468289612D1F431100C0CB87 /* PreviewProvider.swift in Sources */,
 				4644AFF22D20A65500B43C3B /* ClientView.swift in Sources */,
 				461DEB8F2D20BF02007D3326 /* ClientDetailView.swift in Sources */,
@@ -569,6 +568,8 @@
 				4644AFF52D20A6B200B43C3B /* ClientViewModel.swift in Sources */,
 				468289652D1F505800C0CB87 /* FirebaseManager.swift in Sources */,
 				461DEB942D20C204007D3326 /* ClientCell.swift in Sources */,
+				464CACC02D419A5D00B9B0A0 /* Appointment.swift in Sources */,
+				460FC6B92D416F7100EC1C44 /* InputDetailView.swift in Sources */,
 				467E56D02D21BD6100F756F5 /* AddServiceView.swift in Sources */,
 				4690273C2D21DCBB00FD4223 /* ApptService.swift in Sources */,
 				4644AFF82D20A71800B43C3B /* Client.swift in Sources */,
@@ -581,7 +582,6 @@
 				468289B62D1F68E700C0CB87 /* InputView.swift in Sources */,
 				468289D42D1F6C2000C0CB87 /* FormIsValid.swift in Sources */,
 				4682892D2D1F40BC00C0CB87 /* MemoirApp.swift in Sources */,
-				4690273E2D21DD7300FD4223 /* Appointment.swift in Sources */,
 				4682895E2D1F421000C0CB87 /* User.swift in Sources */,
 				461DEB812D20B0B7007D3326 /* MainHeaderView.swift in Sources */,
 				467E56D22D21C3D000F756F5 /* ServiceView.swift in Sources */,

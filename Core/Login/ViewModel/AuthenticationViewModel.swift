@@ -49,7 +49,7 @@ final class AuthenticationViewModel: ObservableObject {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.dataService.userSession = result.user
-            let user = User(id: result.user.uid, name: name, email: email, imageUrl: profileImageUrl)
+            let user = User(uid: result.user.uid, name: name, email: email, imageUrl: profileImageUrl)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await FirebaseManager.userDocument(userId: user.id).setData(encodedUser)
             self.persistImageToFileManager()

@@ -6,3 +6,22 @@
 //
 
 import Foundation
+import FirebaseFirestore
+
+struct Appointment: Identifiable, Codable, Hashable {
+    @DocumentID var id: String?
+    let name: String
+    let description: String
+    let earnings: Double
+    let date: Date
+    let time: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case description
+        case earnings
+        case date
+        case time
+    }
+}

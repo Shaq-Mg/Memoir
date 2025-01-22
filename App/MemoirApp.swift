@@ -20,7 +20,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct MemoirApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authViewModel = AuthenticationViewModel()
-    @StateObject private var apptViewModel = ApptViewModel(apptService: ApptService())
+    @StateObject private var apptViewModel = ApptViewModel()
     @StateObject private var clientViewModel = ClientViewModel()
     @StateObject private var serviceViewModel = ServiceViewModel()
     

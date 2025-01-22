@@ -18,12 +18,26 @@ struct ClientDetailView: View {
     var body: some View {
         VStack {
             MainHeaderView(showSideMenu: $showSideMenu, onDismiss: true, title: client.name)
-            List {
-                Section("Information") {
-                    DetailView(title: "Phone number", description: client.phoneNumber)
-                    DetailView(title: "Nickname", description: client.nickname ?? "")
-                    DetailView(title: "Favourite", description: client.isFavourite.description)
+                .padding(.bottom, 24)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 18) {
+                    InputDetailView(title: "Name", description: client.name)
+                    InputDetailView(title: "Phone Number", description: String(client.phoneNumber))
+                    InputDetailView(title: "Nickname", description: client.nickname ?? "-")
+                    InputDetailView(title: "Favorite", description: client.isFavourite.description)
+                    
+                    Button(action: {
+                        vm.delete(toDelete: client)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            dismiss()
+                        }
+                    }, label: {
+                        Label("Delete", systemImage: "trash")
+                            .font(.headline)
+                            .foregroundStyle(.icon)
+                    })
                 }
+                .padding(.horizontal)
             }
         }
         .navigationBarTitleDisplayMode(.inline)

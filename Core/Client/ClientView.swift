@@ -115,7 +115,6 @@ extension ClientView {
                             ClientCell(client: client)
                         }
                     }
-                    .onDelete(perform: clientVM.delete)
                 }
                 .listStyle(.plain)
             }

@@ -81,15 +81,22 @@ final class ClientViewModel: ObservableObject {
     
     func update(clientToUpdate: Client) {
         guard let uid = dataService.userSession?.uid else { return }
-        FirebaseManager.userCollection.document(uid).collection("clients").document(clientToUpdate.id ?? "").setData(["name": clientToUpdate.name, "phone_number": clientToUpdate.phoneNumber,"nickname": clientToUpdate.nickname ?? "n/a", "is_favourite": clientToUpdate.isFavourite], merge: true)
+        FirebaseManager.userCollection.document(uid).collection("clients").document(clientToUpdate.id ?? "").setData([Client.CodingKeys.name.rawValue: clientToUpdate.name, Client.CodingKeys.phoneNumber.rawValue: clientToUpdate.phoneNumber, Client.CodingKeys.nickname.rawValue: clientToUpdate.nickname ?? "n/a", Client.CodingKeys.isFavourite.rawValue: clientToUpdate.isFavourite], merge: true)
     }
     
-    func delete(at offsets: IndexSet) {
+    func delete(toDelete: Client) {
         guard let uid = dataService.userSession?.uid else { return }
-        offsets.forEach { index in
-            let client = clients[index]
-            if let clientID = client.id {
-                FirebaseManager.delete(uid: uid, collectionPath: "clients", docToDelete: clientID)
+        FirebaseManager.userDocument(userId: uid).collection("clients").document(toDelete.id ?? "").delete { error in
+            if error == nil {
+                DispatchQueue.main.async {
+                    self.clients.removeAll { client in
+                        return client.id == toDelete.id
+                    }
+                }
+                self.fetchClientsWithListener()
+            } else {
+                // handle error here
+                print("Failed to delete client to firestore")
             }
         }
     }

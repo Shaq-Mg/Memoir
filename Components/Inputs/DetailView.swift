@@ -1,13 +1,13 @@
 //
-//  InputDetailView.swift
+//  DetailView.swift
 //  Memoir
 //
-//  Created by Shaquille McGregor on 22/01/2025.
+//  Created by Shaquille McGregor on 28/12/2024.
 //
 
 import SwiftUI
 
-struct InputDetailView: View {
+struct DetailView: View {
     let title: String
     let description: String
     
@@ -25,5 +25,5 @@ struct InputDetailView: View {
 }
 
 #Preview {
-    InputDetailView(title: "Haircut", description: "20mins")
+    DetailView(title: "Haircut", description: "20mins")
 }

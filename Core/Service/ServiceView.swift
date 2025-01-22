@@ -32,7 +32,6 @@ struct ServiceView: View {
                             ServiceCell(service: service)
                         }
                     }
-                    .onDelete(perform: viewModel.delete)
                 }
                 .listStyle(.plain)
             }

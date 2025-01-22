@@ -11,7 +11,7 @@ import FirebaseFirestore
 struct Service: Identifiable, Codable {
     @DocumentID var id: String?
     let title: String
-    let price: String
+    let price: Double
     let duration: String
     
     enum CodingKeys: String, CodingKey {

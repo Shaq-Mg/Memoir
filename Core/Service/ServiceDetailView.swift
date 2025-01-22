@@ -16,28 +16,26 @@ struct ServiceDetailView: View {
     var body: some View {
         VStack {
             MainHeaderView(showSideMenu: $showSideMenu, onDismiss: true, title: service.title)
-            List {
-                Section("General") {
-                    HStack(spacing: 10) {
-                        Circle()
-                            .frame(width: 33, height: 33)
-                            .foregroundStyle(.secondary)
-                            .overlay {
-                                Text((service.title.prefix(1).capitalized))
-                                    .font(.title3.bold())
-                                    .foregroundStyle(.white)
-                            }
-                        
-                        Text(service.title)
-                            .font(.title2.bold())
-                    }
-                    .padding(.vertical, 8)
-                    DetailView(title: "Price", description: String(service.price))
-                    DetailView(title: "Duration", description: String(service.duration))
+                .padding(.bottom, 24)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 18) {
+                    InputDetailView(title: "Title", description: service.title)
+                    InputDetailView(title: "Price", description: "£" + String(service.price))
+                    InputDetailView(title: "Duration", description: String(service.duration))
+                    
+                    Button(action: {
+                        vm.delete(toDelete: service)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            dismiss()
+                        }
+                    }, label: {
+                        Label("Delete", systemImage: "trash")
+                            .font(.headline)
+                            .foregroundStyle(.icon)
+                    })
                 }
-                .fontWeight(.semibold)
+                .padding(.horizontal)
             }
-            .listStyle(.plain)
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)

@@ -65,12 +65,19 @@ final class ServiceViewModel: ObservableObject {
         FirebaseManager.userCollection.document(uid).collection("services").document(serviceToUpdate.id ?? "").setData([Service.CodingKeys.title.rawValue: serviceToUpdate.title, Service.CodingKeys.price.rawValue: serviceToUpdate.price, Service.CodingKeys.duration.rawValue: serviceToUpdate.duration,], merge: true)
     }
     
-    func delete(at offsets: IndexSet) {
+    func delete(toDelete: Service) {
         guard let uid = manager.userSession?.uid else { return }
-        offsets.forEach { index in
-            let service = services[index]
-            if let serviceID = service.id {
-                FirebaseManager.delete(uid: uid, collectionPath: "services", docToDelete: serviceID)
+        FirebaseManager.userDocument(userId: uid).collection("services").document(toDelete.id ?? "").delete { error in
+            if error == nil {
+                DispatchQueue.main.async {
+                    self.services.removeAll { service in
+                        return service.id == toDelete.id
+                    }
+                }
+                self.fetchServicesWithListener()
+            } else {
+                // handle error here
+                print("Failed to delete service to firestore")
             }
         }
     }
