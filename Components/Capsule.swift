@@ -1,5 +1,5 @@
 //
-//  ReusableCapsule.swift
+//  Capsule.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 28/12/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReusableCapsule: View {
+struct Capsule: View {
     var body: some View {
         Capsule()
             .foregroundStyle(Color(.systemGray4))
@@ -16,5 +16,5 @@ struct ReusableCapsule: View {
 }
 
 #Preview {
-    ReusableCapsule()
+    Capsule()
 }
