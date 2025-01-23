@@ -22,20 +22,20 @@ struct ServiceDetailView: View {
                     InputDetailView(title: "Title", description: service.title)
                     InputDetailView(title: "Price", description: "£" + String(service.price))
                     InputDetailView(title: "Duration", description: String(service.duration))
-                    
-                    Button(action: {
-                        vm.delete(toDelete: service)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            dismiss()
-                        }
-                    }, label: {
-                        Label("Delete", systemImage: "trash")
-                            .font(.headline)
-                            .foregroundStyle(.icon)
-                    })
                 }
                 .padding(.horizontal)
             }
+            
+            Button(action: {
+                vm.delete(toDelete: service)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    dismiss()
+                }
+            }, label: {
+                Label("Delete", systemImage: "trash")
+                    .font(.headline)
+                    .foregroundStyle(.icon)
+            })
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)

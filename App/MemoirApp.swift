@@ -21,6 +21,7 @@ struct MemoirApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authViewModel = AuthenticationViewModel()
     @StateObject private var apptViewModel = ApptViewModel()
+    @StateObject private var calenderViewModel = CalenderViewModel()
     @StateObject private var clientViewModel = ClientViewModel()
     @StateObject private var serviceViewModel = ServiceViewModel()
     
@@ -30,6 +31,7 @@ struct MemoirApp: App {
                 HomeView()
                     .environmentObject(apptViewModel)
                     .environmentObject(authViewModel)
+                    .environmentObject(calenderViewModel)
                     .environmentObject(clientViewModel)
                     .environmentObject(serviceViewModel)
             }

@@ -65,7 +65,7 @@ extension AddClientView {
                     .foregroundStyle(.gray)
             }
             Spacer()
-            ReusableCapsule()
+            Capsule()
             Spacer()
             Text("      ")
             

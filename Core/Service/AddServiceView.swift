@@ -66,7 +66,7 @@ extension AddServiceView {
                     .foregroundStyle(.gray)
             }
             Spacer()
-            ReusableCapsule()
+            Capsule()
             Spacer()
             Text("      ")
             
