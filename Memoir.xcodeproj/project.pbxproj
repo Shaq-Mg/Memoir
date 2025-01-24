@@ -10,9 +10,9 @@
 		460FC6B92D416F7100EC1C44 /* InputDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460FC6B82D416F7100EC1C44 /* InputDetailView.swift */; };
 		461DEB812D20B0B7007D3326 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB802D20B0B7007D3326 /* MainHeaderView.swift */; };
 		461DEB832D20B230007D3326 /* AddClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB822D20B230007D3326 /* AddClientView.swift */; };
-		461DEB862D20B2D8007D3326 /* CreateTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB852D20B2D8007D3326 /* CreateTextfield.swift */; };
+		461DEB862D20B2D8007D3326 /* CreateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB852D20B2D8007D3326 /* CreateInputView.swift */; };
 		461DEB882D20B336007D3326 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB872D20B336007D3326 /* Capsule.swift */; };
-		461DEB8A2D20B4C8007D3326 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB892D20B4C8007D3326 /* SearchBarView.swift */; };
+		461DEB8A2D20B4C8007D3326 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB892D20B4C8007D3326 /* SearchBar.swift */; };
 		461DEB8D2D20B520007D3326 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB8C2D20B520007D3326 /* AddButton.swift */; };
 		461DEB8F2D20BF02007D3326 /* ClientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB8E2D20BF02007D3326 /* ClientDetailView.swift */; };
 		461DEB942D20C204007D3326 /* ClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DEB932D20C204007D3326 /* ClientCell.swift */; };
@@ -54,6 +54,10 @@
 		469027382D21D9AE00FD4223 /* ChartState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469027372D21D9AE00FD4223 /* ChartState.swift */; };
 		4690273C2D21DCBB00FD4223 /* ApptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4690273B2D21DCBB00FD4223 /* ApptService.swift */; };
 		469027422D21EBC700FD4223 /* ApptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469027412D21EBC700FD4223 /* ApptViewModel.swift */; };
+		46A70B9E2D43DCF400EC6689 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A70B9D2D43DCF300EC6689 /* FormView.swift */; };
+		46A70BAB2D43DDB600EC6689 /* FormInputVew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A70BAA2D43DDB600EC6689 /* FormInputVew.swift */; };
+		46A70BD12D4406EA00EC6689 /* SelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A70BD02D4406EA00EC6689 /* SelectionSheet.swift */; };
+		46B859AA2D442C3800B588CC /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B859A92D442C3800B588CC /* DropDownMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,9 +81,9 @@
 		460FC6B82D416F7100EC1C44 /* InputDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDetailView.swift; sourceTree = "<group>"; };
 		461DEB802D20B0B7007D3326 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		461DEB822D20B230007D3326 /* AddClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClientView.swift; sourceTree = "<group>"; };
-		461DEB852D20B2D8007D3326 /* CreateTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTextfield.swift; sourceTree = "<group>"; };
+		461DEB852D20B2D8007D3326 /* CreateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInputView.swift; sourceTree = "<group>"; };
 		461DEB872D20B336007D3326 /* Capsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
-		461DEB892D20B4C8007D3326 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		461DEB892D20B4C8007D3326 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		461DEB8C2D20B520007D3326 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		461DEB8E2D20BF02007D3326 /* ClientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDetailView.swift; sourceTree = "<group>"; };
 		461DEB932D20C204007D3326 /* ClientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientCell.swift; sourceTree = "<group>"; };
@@ -116,6 +120,10 @@
 		469027372D21D9AE00FD4223 /* ChartState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartState.swift; sourceTree = "<group>"; };
 		4690273B2D21DCBB00FD4223 /* ApptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApptService.swift; sourceTree = "<group>"; };
 		469027412D21EBC700FD4223 /* ApptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApptViewModel.swift; sourceTree = "<group>"; };
+		46A70B9D2D43DCF300EC6689 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
+		46A70BAA2D43DDB600EC6689 /* FormInputVew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputVew.swift; sourceTree = "<group>"; };
+		46A70BD02D4406EA00EC6689 /* SelectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionSheet.swift; sourceTree = "<group>"; };
+		46B859A92D442C3800B588CC /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -223,8 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				461DEB822D20B230007D3326 /* AddClientView.swift */,
-				4644AFF12D20A65500B43C3B /* ClientView.swift */,
 				461DEB8E2D20BF02007D3326 /* ClientDetailView.swift */,
+				4644AFF12D20A65500B43C3B /* ClientView.swift */,
 				4644AFF32D20A65B00B43C3B /* ViewModel */,
 			);
 			path = Client;
@@ -301,10 +309,8 @@
 		468289572D1F41CC00C0CB87 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				461DEB8B2D20B50D007D3326 /* Buttons */,
 				461DEB922D20C1E5007D3326 /* Cells */,
-				461F06C72D429D23008E939D /* Labels */,
-				461DEB7F2D20B07F007D3326 /* Headers */,
+				46A70BCF2D4406DB00EC6689 /* Sheets */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -396,8 +402,12 @@
 			isa = PBXGroup;
 			children = (
 				461DEB872D20B336007D3326 /* Capsule.swift */,
-				461DEB892D20B4C8007D3326 /* SearchBarView.swift */,
+				46B859A92D442C3800B588CC /* DropDownMenu.swift */,
+				461DEB892D20B4C8007D3326 /* SearchBar.swift */,
+				461DEB8B2D20B50D007D3326 /* Buttons */,
 				468289B82D1F694F00C0CB87 /* Inputs */,
+				461F06C72D429D23008E939D /* Labels */,
+				461DEB7F2D20B07F007D3326 /* Headers */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -405,7 +415,8 @@
 		468289B82D1F694F00C0CB87 /* Inputs */ = {
 			isa = PBXGroup;
 			children = (
-				461DEB852D20B2D8007D3326 /* CreateTextfield.swift */,
+				461DEB852D20B2D8007D3326 /* CreateInputView.swift */,
+				46A70BAA2D43DDB600EC6689 /* FormInputVew.swift */,
 				468289B52D1F68E700C0CB87 /* InputView.swift */,
 				460FC6B82D416F7100EC1C44 /* InputDetailView.swift */,
 			);
@@ -423,6 +434,7 @@
 		4690273F2D21EB5100FD4223 /* Appointment */ = {
 			isa = PBXGroup;
 			children = (
+				46A70B9D2D43DCF300EC6689 /* FormView.swift */,
 				469027402D21EB5F00FD4223 /* ViewModel */,
 			);
 			path = Appointment;
@@ -434,6 +446,14 @@
 				469027412D21EBC700FD4223 /* ApptViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		46A70BCF2D4406DB00EC6689 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				46A70BD02D4406EA00EC6689 /* SelectionSheet.swift */,
+			);
+			path = Sheets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -592,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46A70B9E2D43DCF400EC6689 /* FormView.swift in Sources */,
 				4682892F2D1F40BC00C0CB87 /* HomeView.swift in Sources */,
 				467E56D62D21C57200F756F5 /* ServiceDetailView.swift in Sources */,
 				461DEB8D2D20B520007D3326 /* AddButton.swift in Sources */,
@@ -602,6 +623,7 @@
 				468289BA2D1F6A2800C0CB87 /* LoginView.swift in Sources */,
 				468289612D1F431100C0CB87 /* PreviewProvider.swift in Sources */,
 				4637619A2D42768500F3C7CE /* CalenderViewModel.swift in Sources */,
+				46B859AA2D442C3800B588CC /* DropDownMenu.swift in Sources */,
 				4644AFF22D20A65500B43C3B /* ClientView.swift in Sources */,
 				461DEB8F2D20BF02007D3326 /* ClientDetailView.swift in Sources */,
 				467E56CE2D21BC1F00F756F5 /* ServiceViewModel.swift in Sources */,
@@ -610,14 +632,16 @@
 				468289652D1F505800C0CB87 /* FirebaseManager.swift in Sources */,
 				461DEB942D20C204007D3326 /* ClientCell.swift in Sources */,
 				464CACC02D419A5D00B9B0A0 /* Appointment.swift in Sources */,
+				46A70BD12D4406EA00EC6689 /* SelectionSheet.swift in Sources */,
+				46A70BAB2D43DDB600EC6689 /* FormInputVew.swift in Sources */,
 				460FC6B92D416F7100EC1C44 /* InputDetailView.swift in Sources */,
 				467E56D02D21BD6100F756F5 /* AddServiceView.swift in Sources */,
 				4690273C2D21DCBB00FD4223 /* ApptService.swift in Sources */,
 				4644AFF82D20A71800B43C3B /* Client.swift in Sources */,
 				468289D22D1F6AAC00C0CB87 /* SignUpView.swift in Sources */,
 				467E56D42D21C4BD00F756F5 /* ServiceCell.swift in Sources */,
-				461DEB862D20B2D8007D3326 /* CreateTextfield.swift in Sources */,
-				461DEB8A2D20B4C8007D3326 /* SearchBarView.swift in Sources */,
+				461DEB862D20B2D8007D3326 /* CreateInputView.swift in Sources */,
+				461DEB8A2D20B4C8007D3326 /* SearchBar.swift in Sources */,
 				467E56CB2D21BB1A00F756F5 /* Service.swift in Sources */,
 				463761B42D4277A000F3C7CE /* Date+Est.swift in Sources */,
 				469027422D21EBC700FD4223 /* ApptViewModel.swift in Sources */,

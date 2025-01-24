@@ -17,8 +17,7 @@ struct ServiceView: View {
             MainHeaderView(showSideMenu: $showSideMenu, title: "Services")
             Spacer()
             if viewModel.filteredServices.isEmpty {
-                Text("No services available")
-                    .font(.title2)
+                ContentUnavailableView("No services available", systemImage: "square.and.pencil", description: Text("Please add service to database"))
                 Spacer()
             } else {
                 List {
@@ -28,7 +27,7 @@ struct ServiceView: View {
                                 EmptyView()
                             }
                             .opacity(0)
-
+                            
                             ServiceCell(service: service)
                         }
                     }
@@ -40,11 +39,12 @@ struct ServiceView: View {
         .sheet(isPresented: $showAddServiceView) {
             NavigationStack {
                 AddServiceView()
+                    .environmentObject(viewModel)
             }
         }
         .overlay(alignment: .bottomTrailing, content: {
             HStack {
-                SearchBarView(searchText: $viewModel.searchText)
+                SearchBar(searchText: $viewModel.searchText)
                 Button {
                     showAddServiceView.toggle()
                 } label: {

@@ -8,11 +8,15 @@
 import Foundation
 import FirebaseFirestore
 
-struct Service: Identifiable, Codable {
+struct Service: CustomStringConvertible, Identifiable, Codable, Equatable {
     @DocumentID var id: String?
-    let title: String
+    var title: String
     let price: Double
-    let duration: String
+    let duration: Double
+    
+    var description: String {
+        return title
+    }
     
     enum CodingKeys: String, CodingKey {
         case id

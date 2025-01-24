@@ -17,14 +17,10 @@ struct ClientView: View {
             MainHeaderView(showSideMenu: $showSideMenu, title: "Clients")
             clientListHeader
             
-            ZStack {
+            if clientVM.clients.isEmpty {
+                ContentUnavailableView("No clients found", systemImage: "person.fill.questionmark", description: Text("Add clients to your database"))
+            } else {
                 clientListsView
-                
-                if clientVM.clients.isEmpty {
-                    Text("No clients available")
-                } else {
-                    EmptyView()
-                }
             }
         }
         .onAppear(perform: clientVM.fetchClientsWithListener)
@@ -32,7 +28,7 @@ struct ClientView: View {
         .navigationBarBackButtonHidden(true)
         .overlay(alignment: .bottomTrailing, content: {
             HStack {
-                SearchBarView(searchText: $clientVM.searchText)
+                SearchBar(searchText: $clientVM.searchText)
                 Button {
                     isShowNewClient.toggle()
                     if clientVM.isFavourite == false {
@@ -50,6 +46,7 @@ struct ClientView: View {
         .sheet(isPresented: $isShowNewClient, content: {
             NavigationStack {
                 AddClientView()
+                    .environmentObject(ClientViewModel())
             }
             .environmentObject(clientVM)
         })

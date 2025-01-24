@@ -1,3 +1,11 @@
+//
+//  File.swift
+//  Memoir
+//
+//  Created by Shaquille McGregor on 24/01/2025.
+//
+
+
     let title: String
     let description: String
     

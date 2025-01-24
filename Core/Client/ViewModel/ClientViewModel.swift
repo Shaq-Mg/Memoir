@@ -36,7 +36,7 @@ final class ClientViewModel: ObservableObject {
         self.clientListener?.remove()
     }
     
-    private func clearInformation() {
+    func clearInformation() {
         name = ""
         phoneNumber = ""
         nickname = ""

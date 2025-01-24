@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 final class ApptService {
     @Published var appointments = [Appointment]()
+    @Published var services = [Service]()
     
     let appointmentCollection = "appoiontments"
     
@@ -71,5 +72,10 @@ final class ApptService {
                     try? document.data(as: Appointment.self)
                 }
             }
+    }
+    
+    func fetchAllServices() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Task { services = try await FirebaseManager.fetch(collectionPath: uid, uid: "services", as: Service.self) }
     }
 }

@@ -13,16 +13,10 @@ struct AddClientView: View {
     
     var body: some View {
         VStack(spacing: 18) {
-            addClientHeader
-            
-            Text("Add Client")
-                .font(.system(size: 32, weight: .semibold))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 32)
-            
-            CreateTextfield(text: $viewModel.name, title: "Name", placeholder: "Name")
-            CreateTextfield(text: $viewModel.phoneNumber, title: "Phone number", placeholder: "Phone number")
-            CreateTextfield(text: $viewModel.nickname, title: "Nickname", placeholder: "Nickname")
+            CreateInputView(text: $viewModel.name, title: "Name", placeholder: "Name")
+                .padding(.top)
+            CreateInputView(text: $viewModel.phoneNumber, title: "Phone number", placeholder: "Phone number")
+            CreateInputView(text: $viewModel.nickname, title: "Nickname", placeholder: "Nickname")
             Toggle("Favourite", isOn: $viewModel.isFavourite)
                 .tint(Color.icon)
             
@@ -32,10 +26,10 @@ struct AddClientView: View {
                     dismiss()
                 }
             } label: {
-                Text("Add")
+                Text("Save".uppercased())
                     .font(.headline)
                     .foregroundStyle(Color.dark)
-                    .padding(12)
+                    .padding(10)
                     .frame(maxWidth: .infinity)
                     .background(Color("icon"))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -44,7 +38,17 @@ struct AddClientView: View {
             }
             Spacer()
         }
+        .navigationTitle("Add Client")
+        .navigationBarTitleDisplayMode(.inline)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .presentationDetents([.height(400)])
         .padding(.horizontal)
+        .onAppear(perform: viewModel.clearInformation)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                cancelButton
+            }
+        }
     }
 }
 
@@ -56,21 +60,13 @@ struct AddClientView: View {
 }
 
 extension AddClientView {
-    private var addClientHeader: some View {
-        HStack(alignment: .top) {
-            Button {
-                dismiss()
-            } label: {
-                Text("Cancel")
-                    .foregroundStyle(.gray)
-            }
-            Spacer()
-            Capsule()
-            Spacer()
-            Text("      ")
-            
+    private var cancelButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Text("Cancel")
+                .foregroundStyle(.gray)
         }
         .font(.headline)
-        .padding(.vertical, 16)
     }
 }

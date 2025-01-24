@@ -62,10 +62,10 @@ extension Date {
         return formatter.string(from: self)
     }
     
-    // Returns date as Saturday, Sunday.. etc
+    // Returns date as Saturday 14
     func dayOfTheWeek() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE"
+        formatter.dateFormat = "EEEE dd"
         return formatter.string(from: self)
     }
     

@@ -59,7 +59,9 @@ extension CalenderView {
                     if value.day != -1 {
                         NavigationLink {
                             if !isPast {
-                                
+                                FormView(showSideMenu: $showSideMenu, currentDate: value.date)
+                                    .environmentObject(apptVM)
+                                    .navigationBarBackButtonHidden()
                             }
                             
                         } label: {
@@ -76,7 +78,9 @@ extension CalenderView {
                 .font(.system(size: 20, weight: .semibold))
             }
         }
-        .frame(height: UIScreen.main.bounds.height / 3)
+        .containerRelativeFrame(.vertical, { length, _ in
+            return length / 3.1
+        })
     }
     
     private var calenderHeader: some View {

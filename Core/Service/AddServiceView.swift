@@ -13,20 +13,14 @@ struct AddServiceView: View {
     
     var body: some View {
         VStack(spacing: 18) {
-            addServiceHeader
-            
-            Text("Add Service")
-                .font(.system(size: 32, weight: .semibold))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 32)
-            
-            CreateTextfield(text: $viewModel.title, title: "Title", placeholder: "Title")
-            CreateTextfield(text: $viewModel.price, title: "Price", placeholder: "Amount", isDecimal: true)
-            CreateTextfield(text: $viewModel.duration, title: "Duration", placeholder: "Minutes", isDecimal: true)
+            CreateInputView(text: $viewModel.title, title: "Title", placeholder: "Title")
+                .padding(.top)
+            CreateInputView(text: $viewModel.price, title: "Price", placeholder: "Amount", isDecimal: true)
+            CreateInputView(text: $viewModel.durationValue, title: "Duration", placeholder: "Minutes", isDecimal: true)
             
             Button {
                 if !viewModel.title.isEmpty && !viewModel.price.isEmpty {
-                    viewModel.add(title: viewModel.title, price: viewModel.price, duration: viewModel.duration)
+                    viewModel.add(title: viewModel.title, price: viewModel.price)
                     dismiss()
                 }
             } label: {
@@ -34,18 +28,27 @@ struct AddServiceView: View {
             }
             .font(.headline)
             .foregroundStyle(Color.dark)
-            .padding(12)
+            .padding(10)
             .frame(maxWidth: .infinity)
             .background(Color("icon"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .shadow(radius: 4)
-            .padding(.top, 44)
+            .padding([.top, .bottom], 36)
             
             Spacer()
         }
+        .navigationTitle("Add Service")
+        .navigationBarTitleDisplayMode(.inline)
+        .fontWeight(.semibold)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding(.horizontal)
-        .fontWeight(.semibold)
+        .presentationDetents([.height(400)])
+        .onAppear(perform: viewModel.clearServiceInformation)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                cancelButton
+            }
+        }
     }
 }
 
@@ -56,23 +59,14 @@ struct AddServiceView: View {
     }
 }
 
-extension AddServiceView {
-    private var addServiceHeader: some View {
-        HStack(alignment: .top) {
-            Button {
-                dismiss()
-            } label: {
-                Text("Cancel")
-                    .foregroundStyle(.gray)
-            }
-            Spacer()
-            Capsule()
-            Spacer()
-            Text("      ")
-            
+private extension AddServiceView {
+    private var cancelButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Text("Cancel")
+                .foregroundStyle(.gray)
         }
         .font(.headline)
-        .padding(.vertical, 16)
     }
 }
-

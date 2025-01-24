@@ -5,7 +5,7 @@
 //  Created by Shaquille McGregor on 29/12/2024.
 //
 
-import Foundation
+import SwiftUI
 import Firebase
 
 final class ServiceViewModel: ObservableObject {
@@ -13,11 +13,20 @@ final class ServiceViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var title = ""
     @Published var price = ""
-    @Published var duration = ""
+    @Published var durationValue = "0"
     
     var filteredServices: [Service] {
         guard !searchText.isEmpty else { return services }
         return services.filter({ $0.title.localizedCaseInsensitiveContains(searchText)})
+    }
+    
+    private var doubleBinding: Binding<Double> {
+        Binding<Double>(
+            // Try to convert the string to a double; default to 0 if conversion fails
+            get: { Double(self.durationValue) ?? 0.0 },
+            set: { newValue in
+                // Update the string value when the double changes
+                self.durationValue = String(newValue)})
     }
     
     private var serviceListener: ListenerRegistration? = nil
@@ -32,11 +41,11 @@ final class ServiceViewModel: ObservableObject {
         self.serviceListener?.remove()
     }
     
-    private func clearServiceInformation() {
+    func clearServiceInformation() {
         searchText = ""
         title = ""
         price = ""
-        duration = ""
+        durationValue = "0"
     }
     
     func fetchServicesWithListener() {
@@ -52,10 +61,10 @@ final class ServiceViewModel: ObservableObject {
             }
     }
     
-    func add(title: String, price: String, duration: String) {
+    func add(title: String, price: String) {
         guard let uid = manager.userSession?.uid else { return }
         Task {
-            try await FirebaseManager.create(collectionPath: "services", userId: uid, documentData: [Service.CodingKeys.title.rawValue: title, Service.CodingKeys.price.rawValue: price, Service.CodingKeys.duration.rawValue: duration])
+            try await FirebaseManager.create(collectionPath: "services", userId: uid, documentData: [Service.CodingKeys.title.rawValue: title, Service.CodingKeys.price.rawValue: price, Service.CodingKeys.duration.rawValue: Double(durationValue) ?? 0])
         }
         self.clearServiceInformation()
     }

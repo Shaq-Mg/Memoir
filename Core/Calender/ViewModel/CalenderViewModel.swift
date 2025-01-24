@@ -15,24 +15,6 @@ final class CalenderViewModel: ObservableObject {
     
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     
-    // Generate dates for the current month
-    var daysInMonth: [Date] {
-           let calendar = Calendar.current
-           let range = calendar.range(of: .day, in: .month, for: selectedDate)!
-           let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: selectedDate))!
-           
-           return range.compactMap { day in
-               calendar.date(byAdding: .day, value: day - 1, to: startOfMonth)
-           }
-       }
-    
-    // Format calender days
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        return formatter
-    }
-    
     // Format schedule days
     func fetchDates() -> [Calender] {
         let calender = Calendar.current

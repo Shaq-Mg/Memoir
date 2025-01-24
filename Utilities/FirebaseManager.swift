@@ -28,13 +28,15 @@ final class FirebaseManager {
         userDocument(userId: uid).collection(collectionPath).document("\(typeToUpdate.id)").updateData(typeDictionary)
     }
     
-    static func delete(uid: String, collectionPath: String, docToDelete: String) {
-        userDocument(userId: uid).collection(collectionPath).document(docToDelete).delete { error in
-            if let error = error {
-                print("Failed to delete document from database \(error)")
-            } else {
-                print("Document successfully deleted")
-            }
+    static func delete(uid: String, collectionPath: String, documentID: String) async throws {
+        try await userDocument(userId: uid).collection(collectionPath).document(documentID).delete()
+    }
+    
+    static func fetch<T: Codable & Identifiable>(collectionPath: String, uid: String, as type: T.Type) async throws -> [T] {
+        let snapshot = try await userDocument(userId: uid).collection(collectionPath).getDocuments()
+        
+        return try snapshot.documents.compactMap { document in
+            try document.data(as: T.self)
         }
     }
 }
