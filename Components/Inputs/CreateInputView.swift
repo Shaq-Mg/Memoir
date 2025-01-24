@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CreateTextfield: View {
+struct CreateInputView: View {
     @Binding var text: String
     let title: String
     let placeholder: String
@@ -32,5 +32,5 @@ struct CreateTextfield: View {
 }
 
 #Preview {
-    CreateTextfield(text: .constant(""), title: "Phone number", placeholder: "")
+    CreateInputView(text: .constant(""), title: "Phone number", placeholder: "")
 }

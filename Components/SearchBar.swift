@@ -1,5 +1,5 @@
 //
-//  SearchBarView.swift
+//  SearchBar.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 28/12/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchBarView: View {
+struct SearchBar: View {
     @Binding var searchText: String
     
     var body: some View {
@@ -26,5 +26,5 @@ struct SearchBarView: View {
 }
 
 #Preview {
-    SearchBarView(searchText: .constant(""))
+    SearchBar(searchText: .constant(""))
 }
