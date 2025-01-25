@@ -21,10 +21,8 @@ struct FormView: View {
             Spacer()
             VStack(spacing: 25) {
                 FormInputVew(text: $viewModel.name, title: "Name", placeholder: "Name") { presentNameTextfield.toggle() }
-                    .overlay(alignment: .trailing) {
-                        clearButton
-                    }
-                DropDownMenu(service: $viewModel.selectedSerivce, title: "Service", placeholder: "None") { presentServiceSelection.toggle() }
+                    .overlay(alignment: .trailing) { clearButton }
+                DropDownMenu(service: $viewModel.selectedSerivce, animate: $presentServiceSelection, title: "Service", prompt: "None") { presentServiceSelection.toggle() }
                 
                 timePicker
                 confirmButton
