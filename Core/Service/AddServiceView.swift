@@ -16,7 +16,6 @@ struct AddServiceView: View {
             CreateInputView(text: $viewModel.title, title: "Title", placeholder: "Title")
                 .padding(.top)
             CreateInputView(text: $viewModel.price, title: "Price", placeholder: "Amount", isDecimal: true)
-            CreateInputView(text: $viewModel.durationValue, title: "Duration", placeholder: "Minutes", isDecimal: true)
             
             Button {
                 if !viewModel.title.isEmpty && !viewModel.price.isEmpty {

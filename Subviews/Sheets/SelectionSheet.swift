@@ -50,6 +50,6 @@ struct SelectionSheet<S: CustomStringConvertible & Identifiable & Equatable>: Vi
 
 #Preview {
     NavigationStack {
-        SelectionSheet(selection: .constant(Preview.dev.service), items: [Preview.dev.service, Preview.dev.service])
+        SelectionSheet(selection: .constant(Preview.dev.service1), items: [Preview.dev.service1, Preview.dev.service2])
     }
 }

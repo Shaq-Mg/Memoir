@@ -13,20 +13,10 @@ final class ServiceViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var title = ""
     @Published var price = ""
-    @Published var durationValue = "0"
     
     var filteredServices: [Service] {
         guard !searchText.isEmpty else { return services }
         return services.filter({ $0.title.localizedCaseInsensitiveContains(searchText)})
-    }
-    
-    private var doubleBinding: Binding<Double> {
-        Binding<Double>(
-            // Try to convert the string to a double; default to 0 if conversion fails
-            get: { Double(self.durationValue) ?? 0.0 },
-            set: { newValue in
-                // Update the string value when the double changes
-                self.durationValue = String(newValue)})
     }
     
     private var serviceListener: ListenerRegistration? = nil
@@ -45,7 +35,6 @@ final class ServiceViewModel: ObservableObject {
         searchText = ""
         title = ""
         price = ""
-        durationValue = "0"
     }
     
     func fetchServicesWithListener() {
@@ -64,19 +53,19 @@ final class ServiceViewModel: ObservableObject {
     func add(title: String, price: String) {
         guard let uid = manager.userSession?.uid else { return }
         Task {
-            try await FirebaseManager.create(collectionPath: "services", userId: uid, documentData: [Service.CodingKeys.title.rawValue: title, Service.CodingKeys.price.rawValue: price, Service.CodingKeys.duration.rawValue: Double(durationValue) ?? 0])
+            try await FirebaseManager.create(collectionPath: "services", userId: uid, documentData: [Service.CodingKeys.title.rawValue: title, Service.CodingKeys.price.rawValue: price])
         }
         self.clearServiceInformation()
     }
     
     func update(serviceToUpdate: Service) {
         guard let uid = manager.userSession?.uid else { return }
-        FirebaseManager.userCollection.document(uid).collection("services").document(serviceToUpdate.id ?? "").setData([Service.CodingKeys.title.rawValue: serviceToUpdate.title, Service.CodingKeys.price.rawValue: serviceToUpdate.price, Service.CodingKeys.duration.rawValue: serviceToUpdate.duration,], merge: true)
+        FirebaseManager.userCollection.document(uid).collection("services").document(serviceToUpdate.id).setData([Service.CodingKeys.title.rawValue: serviceToUpdate.title, Service.CodingKeys.price.rawValue: serviceToUpdate.price], merge: true)
     }
     
     func delete(toDelete: Service) {
         guard let uid = manager.userSession?.uid else { return }
-        FirebaseManager.userDocument(userId: uid).collection("services").document(toDelete.id ?? "").delete { error in
+        FirebaseManager.userDocument(userId: uid).collection("services").document(toDelete.id).delete { error in
             if error == nil {
                 DispatchQueue.main.async {
                     self.services.removeAll { service in

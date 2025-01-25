@@ -9,10 +9,9 @@ import Foundation
 import FirebaseFirestore
 
 struct Service: CustomStringConvertible, Identifiable, Codable, Equatable {
-    @DocumentID var id: String?
+    var id = UUID().uuidString
     var title: String
     let price: Double
-    let duration: Double
     
     var description: String {
         return title
@@ -22,6 +21,5 @@ struct Service: CustomStringConvertible, Identifiable, Codable, Equatable {
         case id
         case title
         case price
-        case duration
     }
 }

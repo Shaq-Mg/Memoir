@@ -21,7 +21,6 @@ struct ServiceDetailView: View {
                 VStack(spacing: 18) {
                     InputDetailView(title: "Title", description: service.title)
                     InputDetailView(title: "Price", description: "£" + String(service.price))
-                    InputDetailView(title: "Duration", description: String(service.duration))
                 }
                 .padding(.horizontal)
             }
@@ -44,7 +43,7 @@ struct ServiceDetailView: View {
 
 #Preview {
     NavigationStack {
-        ServiceDetailView(showSideMenu: .constant(false), service: Preview.dev.service)
+        ServiceDetailView(showSideMenu: .constant(false), service: Preview.dev.service1)
             .environmentObject(ServiceViewModel())
     }
 }

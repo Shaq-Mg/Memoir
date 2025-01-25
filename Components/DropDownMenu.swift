@@ -36,5 +36,5 @@ struct DropDownMenu: View {
 }
 
 #Preview {
-    DropDownMenu(service: .constant(Preview.dev.service), title: "Service", placeholder: "Description", action: { })
+    DropDownMenu(service: .constant(Preview.dev.service1), title: "Service", placeholder: "Description", action: { })
 }

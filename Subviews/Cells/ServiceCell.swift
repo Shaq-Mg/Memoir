@@ -11,21 +11,17 @@ struct ServiceCell: View {
     let service: Service
     
     var body: some View {
-        HStack {
+        VStack(alignment: .leading, spacing: 4) {
             Text(service.title)
                 .font(.headline)
-            Spacer()
-            VStack(alignment: .trailing, spacing: 2) {
-                Text("Price: £\(service.price)")
-                    .foregroundStyle(.black)
-                Text("\(service.duration) mins")
-            }
-            .font(.caption)
-            .foregroundStyle(.secondary)
+            Text("Price: £\(service.price)")
+                .foregroundStyle(Color(.systemGray))
         }
+        .font(.caption)
+        .foregroundStyle(.natural)
     }
 }
 
 #Preview {
-    ServiceCell(service: Preview.dev.service)
+    ServiceCell(service: Preview.dev.service1)
 }
