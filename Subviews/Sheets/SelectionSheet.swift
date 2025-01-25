@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SelectionSheet<S: CustomStringConvertible & Identifiable & Equatable>: View {
+struct SelectionSheet<S: Selection>: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var selection: S?
     let items: [S]
@@ -53,3 +53,4 @@ struct SelectionSheet<S: CustomStringConvertible & Identifiable & Equatable>: Vi
         SelectionSheet(selection: .constant(Preview.dev.service1), items: [Preview.dev.service1, Preview.dev.service2])
     }
 }
+

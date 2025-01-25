@@ -8,17 +8,23 @@
 import Foundation
 import FirebaseFirestore
 
-struct Service: CustomStringConvertible, Identifiable, Codable, Equatable {
-    var id = UUID().uuidString
+typealias Selection = CustomStringConvertible & Identifiable & Codable & Equatable
+
+struct Service: Selection {
+    @DocumentID var docId: String?
     var title: String
     let price: Double
+    
+    var id: String {
+        return docId ?? UUID().uuidString
+    }
     
     var description: String {
         return title
     }
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case docId = "doc_id"
         case title
         case price
     }
