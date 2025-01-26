@@ -9,8 +9,8 @@ import SwiftUI
 
 struct FormView: View {
     @EnvironmentObject private var viewModel: ApptViewModel
-    @State private var presentNameTextfield = false
-    @State private var presentServiceSelection = false
+    @State private var nameTextfieldPresented = false
+    @State private var seletionSheetPresented = false
     @State private var isBooked = false
     @Binding var showSideMenu: Bool
     var currentDate: Date
@@ -20,9 +20,9 @@ struct FormView: View {
             MainHeaderView(showSideMenu: $showSideMenu, onDismiss: true, title: currentDate.dayOfTheWeek())
             Spacer()
             VStack(spacing: 25) {
-                FormInputVew(text: $viewModel.name, title: "Name", placeholder: "Name") { presentNameTextfield.toggle() }
+                FormInputVew(text: $viewModel.name, title: "Name", placeholder: "Name") { nameTextfieldPresented.toggle() }
                     .overlay(alignment: .trailing) { clearButton }
-                DropDownMenu(service: $viewModel.selectedSerivce, animate: $presentServiceSelection, title: "Service", prompt: "None") { presentServiceSelection.toggle() }
+                DropDownMenu(service: $viewModel.selectedSerivce, animate: $seletionSheetPresented, title: "Service", prompt: "None") { seletionSheetPresented.toggle() }
                 
                 timePicker
                 confirmButton
@@ -39,12 +39,17 @@ struct FormView: View {
                 viewModel.selectedTime = nil
                 viewModel.selectedSerivce = nil
             }
-            .alert("Enter Name", isPresented: $presentNameTextfield) {
+            .alert("Enter Name", isPresented: $nameTextfieldPresented) {
                 TextField("Name", text: $viewModel.name)
             }
-            .sheet(isPresented: $presentServiceSelection) {
+            .sheet(isPresented: $seletionSheetPresented) {
                 NavigationStack {
                     SelectionSheet(selection: $viewModel.selectedSerivce, items: viewModel.dataService.services)
+                }
+            }
+            .fullScreenCover(isPresented: $isBooked) {
+                NavigationStack {
+                    BookedView(showSideMenu: $showSideMenu)
                 }
             }
             Spacer()
@@ -66,6 +71,7 @@ private extension FormView {
             withAnimation(.easeInOut) {
                 viewModel.name = ""
                 viewModel.selectedSerivce = nil
+                viewModel.selectedTime = nil
             }
         } label: {
             Image(systemName: "xmark.circle")

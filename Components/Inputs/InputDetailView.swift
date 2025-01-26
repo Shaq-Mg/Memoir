@@ -19,7 +19,7 @@ struct InputDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .autocapitalization(.none)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 8).fill(Color(.systemGray6).opacity(0.75)))
+                .background(RoundedRectangle(cornerRadius: 8).fill(Color(.systemGray6).opacity(0.45)))
         }
     }
 }

@@ -11,7 +11,7 @@ struct FormInputVew: View {
     @Binding var text: String
     let title: String
     let placeholder: String
-    let action: ()->()
+    let action: ()->()?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -27,8 +27,8 @@ struct FormInputVew: View {
                     .foregroundStyle(text.isEmpty ? Color(.systemGray) : .natural)
                     .autocapitalization(.none)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(12)
-                    .background(RoundedRectangle(cornerRadius: 8).fill(Color(.systemGray6).opacity(0.75)))
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 1.5).fill(Color(.systemGray)))
             }
         }
     }
