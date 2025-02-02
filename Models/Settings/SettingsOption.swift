@@ -7,8 +7,7 @@
 
 import Foundation
 
-enum SettingsOptions: Int, Route {
-    case subscriptions
+enum Settings: Int, Route {
     case deleteAccount
     case signOut
     
@@ -16,7 +15,6 @@ enum SettingsOptions: Int, Route {
     
     var title: String {
         switch self {
-        case .subscriptions: return "Manage Subscriptions"
         case .deleteAccount: return "Delete Account"
         case .signOut: return "Sign Out"
             
@@ -25,7 +23,6 @@ enum SettingsOptions: Int, Route {
     
     var imageName: String {
         switch self {
-        case .subscriptions: return "iphone"
         case .deleteAccount: return "minus.circle"
         case .signOut: return "lock"
             
@@ -34,8 +31,9 @@ enum SettingsOptions: Int, Route {
     
 }
 
-enum Device: Int, Route {
+enum SettingsOption: Int, Route {
     case appearance
+    case subscriptions
     case notifications
     case contact
     case privacy
@@ -46,6 +44,7 @@ enum Device: Int, Route {
     var title: String {
         switch self {
         case .appearance: return "Appearance"
+        case .subscriptions: return "Manage Subscriptions"
         case .notifications: return "Push Notifications"
         case .contact: return "Contact Us"
         case .privacy: return "Private Policy"
@@ -57,10 +56,23 @@ enum Device: Int, Route {
     var imageName: String {
         switch self {
         case .appearance: return "moon"
+        case .subscriptions: return "iphone"
         case .notifications: return "bell.badge"
         case .contact: return "message"
         case .privacy: return "shield.righthalf.filled"
         case .terms: return "list.clipboard"
+            
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .appearance: return ""
+        case .subscriptions: return ""
+        case .notifications: return ""
+        case .contact: return ""
+        case .privacy: return ""
+        case .terms: return ""
             
         }
     }
