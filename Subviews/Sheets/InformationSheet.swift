@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct InformationSheet: View {
+    let option: SettingsOption
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 12) {
+            ScrollView {
+                Text(option.description)
+                    .font(.subheadline)
+                    .foregroundStyle(Color(.systemGray))
+                    .padding(.top, 36)
+            }
+        }
+        .bold()
+        .navigationTitle(option.title)
+        .padding(.horizontal, 12)
     }
 }
 
 #Preview {
-    InformationSheet()
+    InformationSheet(option: .privacy)
 }

@@ -23,21 +23,6 @@ struct ChartStateView: View {
                 Last7Days(chartState: $chartState, selectedOption: $selectedOption)
             }
         }
-        .onAppear {
-            vm.apptService.appointments = generateSampleAppointments()
-        }
-    }
-    
-    // Function to generate sample appointments for testing
-    private func generateSampleAppointments() -> [Appointment] {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        
-        return (0..<50).map { _ in
-            let randomDayOffset = Int.random(in: 0...6) // Within the next 7 days
-            let randomDate = calendar.date(byAdding: .day, value: randomDayOffset, to: today)!
-            return Appointment(name: "Lamelo", description: "Haircut", earnings: 20.00, date: randomDate, time: Date.now)
-        }
     }
 }
 

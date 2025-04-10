@@ -6,36 +6,37 @@
 //
 
 import SwiftUI
+import Charts
 
 struct Next7Days: View {
-    @EnvironmentObject private var viewModel: ChartViewModel
+    @EnvironmentObject private var vm: ChartViewModel
     @State private var startDate = Date()
     @Binding var chartState: ChartState
     @Binding var selectedOption: ChartState?
     
     var body: some View {
         VStack(spacing: 14) {
-            ChartHeaderView(chartState: $chartState, earnings: viewModel.calculateTotalEarnings(from: viewModel.apptService.appointments))
+            ChartHeaderView(chartState: $chartState, earnings: vm.calculateTotalEarnings(from: vm.apptService.appointments))
             // Chart View
             Chart {
-                if let selectedDate = viewModel.selectedDate {
+                if let selectedDate = vm.selectedDate {
                     RuleMark(x: .value("Selected Day", selectedDate.date, unit: .day))
                         .foregroundStyle(Color(.darkGray).opacity(0.3))
                         .annotation(position: .top, overflowResolution: .init(x: .fit(to: .chart), y: .disabled)) {
-                            ChartAnnotation(date: selectedDate.date, earnings: viewModel.totalEarningsForDate(for: selectedDate.date))
+                            ChartAnnotation(date: selectedDate.date, earnings: vm.calculateTotalEarnings(from: vm.apptService.appointments))
                         }
                 }
                 
-                ForEach(viewModel.fetchNext7Days(from: startDate), id: \.date) { appt in
+                ForEach(vm.fetchNext7Days(from: startDate), id: \.date) { appt in
                     BarMark(
                         x: .value("Date", appt.date, unit: .day),
                         y: .value("Appointment", appt.count)
                     )
-                    .foregroundStyle(.indigo.gradient)
-                    .opacity(viewModel.rawSelectedDate == nil || appt.date == viewModel.selectedDate?.date ? 1.0 : 0.3)
+                    .foregroundStyle(.icon.gradient)
+                    .opacity(vm.rawSelectedDate == nil || appt.date == vm.selectedDate?.date ? 1.0 : 0.3)
                 }
             }
-            .chartXSelection(value: $viewModel.rawSelectedDate.animation(.easeInOut))
+            .chartXSelection(value: $vm.rawSelectedDate.animation(.easeInOut))
             .chartYAxis(.hidden)
             .chartXAxis {
                 AxisMarks { mark in
@@ -45,9 +46,11 @@ struct Next7Days: View {
             .frame(height: 180)
             ChartPicker(chartState: $chartState)
         }
+        .onAppear { vm.appointmentsForLast7days() }
     }
 }
 
 #Preview {
-    Next7Days()
+    Next7Days(chartState: .constant(.next7Days), selectedOption: .constant(.next7Days))
+        .environmentObject(ChartViewModel())
 }

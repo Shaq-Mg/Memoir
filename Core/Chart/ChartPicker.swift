@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct ChartPicker: View {
+    @Binding var chartState: ChartState
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Picker("", selection: $chartState) {
+            ForEach(ChartState.allCases) { value in
+                Text(value.rawValue)
+                    .tag(value)
+                    .onTapGesture {
+                        withAnimation(.easeIn) {
+                            chartState = value
+                        }
+                    }
+            }
+        }
+        .tint(Color(.darkGray))
+        .frame(maxWidth: .infinity, alignment: .trailing)
     }
 }
 
 #Preview {
-    ChartPicker()
+    ChartPicker(chartState: .constant(.next7Days))
 }

@@ -47,7 +47,7 @@ struct MainHeaderView: View {
                             .foregroundStyle(.white)
                     }
                 }
-                .font(.system(size: 20, weight: .semibold))
+                .font(.system(size: 22, weight: .semibold))
             }
         }
         .padding()

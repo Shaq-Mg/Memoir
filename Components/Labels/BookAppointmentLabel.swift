@@ -11,7 +11,7 @@ struct BookAppointmentLabel: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 6) {
-                Text("New booking appointment")
+                Text("Book Appointment Today")
                 Text("Add new booking")
                     .foregroundStyle(Color(.systemGray))
             }

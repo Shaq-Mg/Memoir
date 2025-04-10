@@ -34,7 +34,7 @@ struct SelectionSheet<S: Selection>: View {
         }
         .navigationTitle("Select")
         .navigationBarTitleDisplayMode(.inline)
-        .presentationDetents([.height(300)])
+        .presentationDetents([.fraction(0.3)])
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

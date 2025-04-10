@@ -14,6 +14,7 @@ final class ApptService {
     @Published var services = [Service]()
     
     let appointmentCollection = "appoiontments"
+    static let shared = ApptService()
     
     // Fetch upcoming appointments to display in order by date
     func getUpcomingAppointments() {
@@ -72,6 +73,22 @@ final class ApptService {
                     try? document.data(as: Appointment.self)
                 }
             }
+    }
+    
+    func fetchAppointmentsForEarnings(value: Int) async throws -> [Appointment] {
+        guard let uid = Auth.auth().currentUser?.uid else { return [] }
+        
+        let calendar = Calendar.current
+        let dateRange = calendar.date(byAdding: .day, value: value, to: Date()) ?? Date()
+        
+        let querySnapshot = try await  FirebaseManager.userDocument(userId: uid).collection(appointmentCollection)
+            .whereField("date", isGreaterThanOrEqualTo: dateRange)
+            .order(by: "date", descending: true)
+            .getDocuments()
+        
+        return try querySnapshot.documents.compactMap { doc in
+            try doc.data(as: Appointment.self)
+        }
     }
     
     func fetchAllServices() {

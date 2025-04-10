@@ -81,12 +81,12 @@ final class ClientViewModel: ObservableObject {
     
     func update(clientToUpdate: Client) {
         guard let uid = dataService.userSession?.uid else { return }
-        FirebaseManager.userCollection.document(uid).collection("clients").document(clientToUpdate.id ?? "").setData([Client.CodingKeys.name.rawValue: clientToUpdate.name, Client.CodingKeys.phoneNumber.rawValue: clientToUpdate.phoneNumber, Client.CodingKeys.nickname.rawValue: clientToUpdate.nickname ?? "n/a", Client.CodingKeys.isFavourite.rawValue: clientToUpdate.isFavourite], merge: true)
+        FirebaseManager.userCollection.document(uid).collection("clients").document(clientToUpdate.id).setData([Client.CodingKeys.name.rawValue: clientToUpdate.name, Client.CodingKeys.phoneNumber.rawValue: clientToUpdate.phoneNumber, Client.CodingKeys.nickname.rawValue: clientToUpdate.nickname ?? "n/a", Client.CodingKeys.isFavourite.rawValue: clientToUpdate.isFavourite], merge: true)
     }
     
     func delete(toDelete: Client) {
         guard let uid = dataService.userSession?.uid else { return }
-        FirebaseManager.userDocument(userId: uid).collection("clients").document(toDelete.id ?? "").delete { error in
+        FirebaseManager.userDocument(userId: uid).collection("clients").document(toDelete.id).delete { error in
             if error == nil {
                 DispatchQueue.main.async {
                     self.clients.removeAll { client in

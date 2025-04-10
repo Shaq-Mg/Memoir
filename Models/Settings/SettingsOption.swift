@@ -1,35 +1,11 @@
 //
-//  Settings.swift
+//  SettingsOption.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 02/02/2025.
 //
 
 import Foundation
-
-enum Settings: Int, Route {
-    case deleteAccount
-    case signOut
-    
-    var id: Int { return self.rawValue }
-    
-    var title: String {
-        switch self {
-        case .deleteAccount: return "Delete Account"
-        case .signOut: return "Sign Out"
-            
-        }
-    }
-    
-    var imageName: String {
-        switch self {
-        case .deleteAccount: return "minus.circle"
-        case .signOut: return "lock"
-            
-        }
-    }
-    
-}
 
 enum SettingsOption: Int, Route {
     case appearance
@@ -47,7 +23,7 @@ enum SettingsOption: Int, Route {
         case .subscriptions: return "Manage Subscriptions"
         case .notifications: return "Push Notifications"
         case .contact: return "Contact Us"
-        case .privacy: return "Private Policy"
+        case .privacy: return "Privacy Policy"
         case .terms: return "Terms of Service"
        
         }
@@ -55,12 +31,12 @@ enum SettingsOption: Int, Route {
     
     var imageName: String {
         switch self {
-        case .appearance: return "moon"
+        case .appearance: return "moon.fill"
         case .subscriptions: return "iphone"
-        case .notifications: return "bell.badge"
-        case .contact: return "message"
+        case .notifications: return "bell.badge.fill"
+        case .contact: return "message.fill"
         case .privacy: return "shield.righthalf.filled"
-        case .terms: return "list.clipboard"
+        case .terms: return "list.clipboard.fill"
             
         }
     }

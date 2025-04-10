@@ -22,16 +22,17 @@ struct ChartView: View {
                     .padding(.vertical, 16)
                 
                 NavigationLink {
-                    
+                    FormView(showSideMenu: $isMenuShowing, currentDate: currentDate)
+                        .environmentObject(apptViewModel)
+                        .navigationBarBackButtonHidden()
                 } label: {
                     BookAppointmentLabel()
-                        .navigationBarBackButtonHidden()
                 }
                 .padding(.bottom, 16)
                 
                 upcomingApptHeader
                 
-                ExpandableBookingView(currentDate: $currentDate)
+                BookingScrollView(currentDate: $currentDate)
             }
             .padding([.horizontal, .bottom])
         }
@@ -61,7 +62,9 @@ private extension ChartView {
             Spacer()
             
             NavigationLink {
-                
+                DayView(showSideMenu: $isMenuShowing, currentDate: currentDate)
+                    .environmentObject(apptViewModel)
+                    .navigationBarBackButtonHidden()
             } label: {
                 Text("See all")
                     .font(.title3)

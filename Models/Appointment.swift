@@ -25,3 +25,12 @@ struct Appointment: Identifiable, Codable, Hashable {
         case time
     }
 }
+
+enum ChartState: String, Identifiable, CaseIterable {
+    case next7Days = "This week"
+    case last7Days = "Last week"
+    
+    var id: String {
+        return rawValue
+    }
+}

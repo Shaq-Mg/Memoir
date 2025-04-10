@@ -34,6 +34,7 @@ struct MemoirApp: App {
                     .environmentObject(calenderViewModel)
                     .environmentObject(clientViewModel)
                     .environmentObject(serviceViewModel)
+                    .navigationBarBackButtonHidden()
             }
         }
     }

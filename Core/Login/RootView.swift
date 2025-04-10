@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct RootView: View {
+    @EnvironmentObject var authViewModel: AuthenticationViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            if authViewModel.dataService.userSession != nil {
+                HomeView()
+                    .environmentObject(authViewModel)
+            } else {
+                LoginView()
+                    .environmentObject(authViewModel)
+            }
+        }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    RootView()
+    NavigationStack {
+        RootView()
+            .environmentObject(AuthenticationViewModel())
+    }
 }

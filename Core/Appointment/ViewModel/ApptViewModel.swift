@@ -24,8 +24,8 @@ final class ApptViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let calendar = Calendar.current
     
-    let service = AuthService.shared
-    let dataService = ApptService()
+    let authService = AuthService.shared
+    let dataService = ApptService.shared
     let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
@@ -60,7 +60,7 @@ final class ApptViewModel: ObservableObject {
     }
     
     func delete(apptToDelete: Appointment) {
-        guard let uid = service.userSession?.uid else { return }
+        guard let uid = authService.userSession?.uid else { return }
         FirebaseManager.userDocument(userId: uid).collection(dataService.appointmentCollection).document(apptToDelete.id ?? "").delete { error in
             if error == nil {
                 DispatchQueue.main.async {

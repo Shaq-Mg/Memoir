@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct ChartAnnotation: View {
+    let date: Date
+    let earnings: Double
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 6) {
+            Text(date.fullMonthDayYearFormat())
+                .font(.subheadline)
+            
+            Text(earnings, format: .currency(code: Locale.current.currency?.identifier ?? "GBP"))
+                .font(.body).italic()
+        }
+        .bold()
+        .foregroundStyle(.dark)
+        .padding(12)
+        .frame(width: 120, alignment: .leading)
+        .background(RoundedRectangle(cornerRadius: 10).fill(.icon.gradient))
     }
 }
 
 #Preview {
-    ChartAnnotation()
+    ChartAnnotation(date: Date(), earnings: 250.00)
 }

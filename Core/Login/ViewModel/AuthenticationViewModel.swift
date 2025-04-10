@@ -103,7 +103,7 @@ extension AuthenticationViewModel {
     
     private func saveImageToFileManager(data: Data) {
         let fileManager = FileManager.default
-        let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let directory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first!
         let fileName = UUID().uuidString + ".jpg"
         let filePath = directory.appendingPathComponent(fileName)
         

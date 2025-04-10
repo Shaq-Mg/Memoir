@@ -16,16 +16,17 @@ struct CalenderView: View {
     
     var body: some View {
         VStack {
-            MainHeaderView(showSideMenu: $showSideMenu, onDismiss: true, title: "Select a date")
+            MainHeaderView(showSideMenu: $showSideMenu, title: "Select a date")
             Spacer()
             VStack(spacing: 20) {
                 calenderHeader
                 HStack {
                     ForEach(vm.days, id: \.self) { day in
                         Text(day)
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 20, weight: .semibold))
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity)
+                            .padding(.bottom, 12)
                     }
                 }
                 calenderDays
@@ -66,7 +67,7 @@ extension CalenderView {
                             
                         } label: {
                             Text("\(value.day)")
-                                .frame(width: 46, height: 46)
+                                .frame(width: 44, height: 44)
                                 .background(RoundedRectangle(cornerRadius: 10).fill(isPast ? Color(.systemGray4).opacity(0.5) : .icon.opacity(0.7)))
                                 .foregroundStyle(isPast ? Color(.systemGray) : .dark)
                         }
@@ -75,11 +76,11 @@ extension CalenderView {
                         Text("")
                     }
                 }
-                .font(.system(size: 20, weight: .semibold))
+                .font(.system(size: 24, weight: .semibold))
             }
         }
         .containerRelativeFrame(.vertical, { length, _ in
-            return length / 3.1
+            return length / 3
         })
     }
     

@@ -94,7 +94,6 @@ extension ClientView {
                         NavigationLink(destination: ClientDetailView(showSideMenu: $showSideMenu, client: client)) {
                             EmptyView()
                         }
-                        .environmentObject(clientVM)
                         .opacity(0)
                         ClientCell(client: client)
                     }
