@@ -36,6 +36,9 @@ struct ChartView: View {
             }
             .padding([.horizontal, .bottom])
         }
+        .onAppear {
+            apptViewModel.dataService.appointments.append(contentsOf: [Preview.dev.appt1, Preview.dev.appt2])
+        }
     }
 }
 
@@ -58,7 +61,11 @@ private extension ChartView {
                 Text("Today?")
             }
             .padding(12)
-            .background(RoundedRectangle(cornerRadius: 10).fill(.tone.gradient))
+            .background(RoundedRectangle(cornerRadius: 10).fill(.white.opacity(0.5)))
+            .overlay {
+                RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 1)
+                    .fill(Color(.systemGray))
+            }
             Spacer()
             
             NavigationLink {
@@ -70,7 +77,6 @@ private extension ChartView {
                     .font(.title3)
                     .foregroundStyle(Color(.systemBlue))
                     .padding(12)
-                    .background(RoundedRectangle(cornerRadius: 10).fill(.tone.gradient))
             }
         }
         .font(.title2).fontWeight(.semibold)
