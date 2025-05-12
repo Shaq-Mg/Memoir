@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct CircularProfileView: View {
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image("Barca")
+            .resizable()
+            .scaledToFill()
+            .frame(width: 40, height: 40)
+            .clipShape(Circle())
+            .overlay {
+                Circle().stroke(lineWidth: 1)
+                    .foregroundStyle(Color(.label))
+            }
+            .shadow(radius: 4)
     }
 }
 

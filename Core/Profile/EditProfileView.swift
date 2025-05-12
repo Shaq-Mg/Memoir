@@ -8,11 +8,60 @@
 import SwiftUI
 
 struct EditProfileView: View {
+    @StateObject private var viewModel = ProfileViewModel()
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color(.systemGroupedBackground)
+                .ignoresSafeArea()
+            VStack {
+                HStack(alignment: .top) {
+                    InputView(text: $viewModel.name, title: "Name", placeholder: "Kobe")
+                    Spacer()
+                    
+                    Button {
+                        
+                    } label: {
+                        CircularProfileView()
+                    }
+                }
+                Divider()
+                    .padding(.vertical, 10)
+                InputView(text: $viewModel.email, title: "Email", placeholder: "kobe@gmail.com")
+            }
+            .padding()
+            .background(Color("AppBackground"))
+            .background(RoundedRectangle(cornerRadius: 10))
+            .overlay {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color(.systemGray3), lineWidth: 1)
+            }
+            .padding()
+        }
+        .navigationTitle("Edit Profile")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Save") {
+                    
+                }
+            }
+        }
+        .font(.subheadline)
+        .fontWeight(.semibold)
+        .foregroundStyle(Color(.label))
     }
 }
 
 #Preview {
-    EditProfileView()
+    NavigationStack {
+        EditProfileView()
+    }
 }

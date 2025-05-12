@@ -12,14 +12,9 @@ struct User: Identifiable, Codable {
     let name: String
     let email: String
     let profileImageUrl: String
-    var isPremium = false
     
     var id: String {
         return uid ?? UUID().uuidString
-    }
-    
-    mutating func premiumStatus(newValue: Bool) {
-        self.isPremium = newValue
     }
     
     enum CodingKeys: String, CodingKey {
@@ -27,6 +22,5 @@ struct User: Identifiable, Codable {
         case name = "name"
         case email = "email"
         case profileImageUrl = "profile_image_url"
-        case isPremium = "is_premium"
     }
 }

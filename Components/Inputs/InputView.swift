@@ -8,11 +8,35 @@
 import SwiftUI
 
 struct InputView: View {
+    @Binding var text: String
+    let title: String
+    let placeholder: String
+    var isDecimal = false
+    var isNote = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 10) {
+            if isDecimal {
+                Text(title)
+                    .fontWeight(.semibold)
+                TextField(placeholder, text: $text)
+                    .keyboardType(.decimalPad)
+                Divider()
+            } else if isNote {
+                Text(title)
+                    .fontWeight(.semibold)
+                TextField(placeholder, text: $text, axis: .vertical)
+                Divider()
+            } else {
+                Text(title)
+                    .fontWeight(.semibold)
+                TextField(placeholder, text: $text)
+            }
+        }
+        .font(.caption)
     }
 }
 
 #Preview {
-    InputView()
+    InputView(text: .constant(""), title: "Email", placeholder: "kobe@gmail.com")
 }
