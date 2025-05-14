@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct DetailRowView: View {
+    let title: String
+    let placeholder: String
+    @Binding var text: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.callout).bold()
+            TextField(placeholder, text: $text)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .autocapitalization(.none)
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 8).fill(Color(.systemGray6).opacity(0.45)))
+        }
     }
 }
 
 #Preview {
-    DetailRowView()
+    DetailRowView(title: "Haircut", placeholder: "20mins", text: .constant(""))
 }

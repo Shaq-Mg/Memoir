@@ -28,9 +28,20 @@
 		4603925D2DD13CAD00A99290 /* CircularProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603925C2DD13CAD00A99290 /* CircularProfileView.swift */; };
 		4633F1B12DCE324600FED778 /* MemoirApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4633F1B02DCE324600FED778 /* MemoirApp.swift */; };
 		4633F1B32DCE324600FED778 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4633F1B22DCE324600FED778 /* ContentView.swift */; };
+		465467242DD3EBB700A21BBE /* ClientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465467232DD3EBB700A21BBE /* ClientListView.swift */; };
 		465A9F882DD25DB8005D5A8B /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465A9F872DD25DB8005D5A8B /* FirebaseService.swift */; };
 		465A9F8B2DD25E7E005D5A8B /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465A9F8A2DD25E7E005D5A8B /* Client.swift */; };
 		465A9FA62DD26002005D5A8B /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465A9FA52DD26002005D5A8B /* ClientManager.swift */; };
+		46A1C1B82DD3BDA60045E26D /* ClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C1B72DD3BDA60045E26D /* ClientView.swift */; };
+		46A1C1C62DD3BF310045E26D /* AppHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C1C52DD3BF310045E26D /* AppHeaderView.swift */; };
+		46A1C1DE2DD3C0670045E26D /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C1DD2DD3C0670045E26D /* SearchBarView.swift */; };
+		46A1C1E02DD3C1620045E26D /* ClientFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C1DF2DD3C1620045E26D /* ClientFormView.swift */; };
+		46A1C1E22DD3C1F20045E26D /* ClientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C1E12DD3C1F20045E26D /* ClientDetailView.swift */; };
+		46A1C1FB2DD3C26F0045E26D /* ClientCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C1FA2DD3C26F0045E26D /* ClientCellView.swift */; };
+		46A1C2142DD3C5E60045E26D /* CancelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C2132DD3C5E60045E26D /* CancelButtonView.swift */; };
+		46A1C22C2DD3D0FC0045E26D /* DetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C22B2DD3D0FC0045E26D /* DetailRowView.swift */; };
+		46A1C2442DD3DC710045E26D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C2432DD3DC710045E26D /* LoadingView.swift */; };
+		46A1C2522DD3DDE70045E26D /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A1C2512DD3DDE70045E26D /* PreviewProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,9 +82,20 @@
 		4633F1B22DCE324600FED778 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4633F1BD2DCE324800FED778 /* MemoirTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoirTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4633F1C72DCE324800FED778 /* MemoirUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoirUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		465467232DD3EBB700A21BBE /* ClientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientListView.swift; sourceTree = "<group>"; };
 		465A9F872DD25DB8005D5A8B /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		465A9F8A2DD25E7E005D5A8B /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		465A9FA52DD26002005D5A8B /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
+		46A1C1B72DD3BDA60045E26D /* ClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientView.swift; sourceTree = "<group>"; };
+		46A1C1C52DD3BF310045E26D /* AppHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderView.swift; sourceTree = "<group>"; };
+		46A1C1DD2DD3C0670045E26D /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		46A1C1DF2DD3C1620045E26D /* ClientFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientFormView.swift; sourceTree = "<group>"; };
+		46A1C1E12DD3C1F20045E26D /* ClientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDetailView.swift; sourceTree = "<group>"; };
+		46A1C1FA2DD3C26F0045E26D /* ClientCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientCellView.swift; sourceTree = "<group>"; };
+		46A1C2132DD3C5E60045E26D /* CancelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButtonView.swift; sourceTree = "<group>"; };
+		46A1C22B2DD3D0FC0045E26D /* DetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRowView.swift; sourceTree = "<group>"; };
+		46A1C2432DD3DC710045E26D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		46A1C2512DD3DDE70045E26D /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -263,6 +285,7 @@
 		4633F1DE2DCE327500FED778 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				46A1C2502DD3DDCF0045E26D /* Providers */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,6 +293,10 @@
 		4633F1DF2DCE328300FED778 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				465467232DD3EBB700A21BBE /* ClientListView.swift */,
+				46A1C1DD2DD3C0670045E26D /* SearchBarView.swift */,
+				46A1C2122DD3C5D60045E26D /* Buttons */,
+				46A1C1F92DD3C25C0045E26D /* Cells */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -278,6 +305,9 @@
 			isa = PBXGroup;
 			children = (
 				4603925C2DD13CAD00A99290 /* CircularProfileView.swift */,
+				46A1C22B2DD3D0FC0045E26D /* DetailRowView.swift */,
+				46A1C2432DD3DC710045E26D /* LoadingView.swift */,
+				46A1C1C42DD3BF1D0045E26D /* Headers */,
 				460391D52DD10B7B00A99290 /* Inputs */,
 			);
 			path = Components;
@@ -294,6 +324,9 @@
 		465A9FA22DD25FE1005D5A8B /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				46A1C1DF2DD3C1620045E26D /* ClientFormView.swift */,
+				46A1C1E12DD3C1F20045E26D /* ClientDetailView.swift */,
+				46A1C1B72DD3BDA60045E26D /* ClientView.swift */,
 				465A9FA42DD25FF0005D5A8B /* Manager */,
 			);
 			path = Client;
@@ -305,6 +338,38 @@
 				465A9FA52DD26002005D5A8B /* ClientManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		46A1C1C42DD3BF1D0045E26D /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				46A1C1C52DD3BF310045E26D /* AppHeaderView.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		46A1C1F92DD3C25C0045E26D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				46A1C1FA2DD3C26F0045E26D /* ClientCellView.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		46A1C2122DD3C5D60045E26D /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				46A1C2132DD3C5E60045E26D /* CancelButtonView.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		46A1C2502DD3DDCF0045E26D /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				46A1C2512DD3DDE70045E26D /* PreviewProvider.swift */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -460,23 +525,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				460392432DD12C2500A99290 /* EditProfileView.swift in Sources */,
+				46A1C1B82DD3BDA60045E26D /* ClientView.swift in Sources */,
 				4633F1B32DCE324600FED778 /* ContentView.swift in Sources */,
 				460391DF2DD10E0300A99290 /* SignUpView.swift in Sources */,
 				4633F1B12DCE324600FED778 /* MemoirApp.swift in Sources */,
+				46A1C2442DD3DC710045E26D /* LoadingView.swift in Sources */,
 				460391FA2DD116A100A99290 /* ContentViewModel.swift in Sources */,
+				46A1C2142DD3C5E60045E26D /* CancelButtonView.swift in Sources */,
 				4603925D2DD13CAD00A99290 /* CircularProfileView.swift in Sources */,
+				46A1C22C2DD3D0FC0045E26D /* DetailRowView.swift in Sources */,
 				460391FE2DD119DC00A99290 /* SignUpViewModel.swift in Sources */,
 				460391FC2DD119C100A99290 /* LoginViewModel.swift in Sources */,
 				465A9F8B2DD25E7E005D5A8B /* Client.swift in Sources */,
+				46A1C2522DD3DDE70045E26D /* PreviewProvider.swift in Sources */,
 				460391EC2DD112C100A99290 /* AuthService.swift in Sources */,
 				460391DB2DD10D6F00A99290 /* LoginView.swift in Sources */,
+				46A1C1FB2DD3C26F0045E26D /* ClientCellView.swift in Sources */,
 				4603923D2DD12A5E00A99290 /* UserService.swift in Sources */,
 				4603920B2DD1241F00A99290 /* User.swift in Sources */,
 				465A9F882DD25DB8005D5A8B /* FirebaseService.swift in Sources */,
 				460392412DD12BA800A99290 /* ProfileViewModel.swift in Sources */,
 				4603925B2DD137E400A99290 /* InputView.swift in Sources */,
 				4603921A2DD1292700A99290 /* FirebaseConstants.swift in Sources */,
+				465467242DD3EBB700A21BBE /* ClientListView.swift in Sources */,
+				46A1C1DE2DD3C0670045E26D /* SearchBarView.swift in Sources */,
 				465A9FA62DD26002005D5A8B /* ClientManager.swift in Sources */,
+				46A1C1E02DD3C1620045E26D /* ClientFormView.swift in Sources */,
+				46A1C1C62DD3BF310045E26D /* AppHeaderView.swift in Sources */,
+				46A1C1E22DD3C1F20045E26D /* ClientDetailView.swift in Sources */,
 				460391D82DD10B9800A99290 /* LoginInputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

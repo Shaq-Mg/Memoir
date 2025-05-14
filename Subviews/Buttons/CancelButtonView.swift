@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct CancelButtonView: View {
+    @Environment(\.dismiss) private var dismiss
+    let fontSize: Font
+    let fontColor: Color
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            dismiss()
+        } label: {
+            Text("Cancel")
+                .foregroundStyle(fontColor)
+                .font(fontSize)
+        }
     }
 }
 
 #Preview {
-    CancelButtonView()
+    CancelButtonView(fontSize: .footnote, fontColor: Color(.label))
 }

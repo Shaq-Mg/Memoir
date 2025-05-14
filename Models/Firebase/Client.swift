@@ -22,8 +22,9 @@ struct Client: FirebaseModel {
         return name
     }
     
-    mutating func favouriteStatus(newValue: Bool) {
-        self.isFavourite = newValue
+    mutating func favouriteStatus() {
+        let currentValue = isFavourite
+        isFavourite = !currentValue
     }
     
     enum CodingKeys: String, CodingKey {

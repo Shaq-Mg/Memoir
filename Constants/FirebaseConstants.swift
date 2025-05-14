@@ -14,4 +14,8 @@ enum FirebaseConstants {
     static func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
     }
+    
+    static func collectionPath(userId: String, collectionId: String) -> CollectionReference {
+        userCollection.document(userId).collection(collectionId)
+    }
 }

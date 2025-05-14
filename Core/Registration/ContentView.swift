@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
+    @State private var isMenuShowing = false
     var body: some View {
         if viewModel.userSession != nil {
-            EditProfileView()
+            ClientView(showSideMenu: $isMenuShowing)
         } else {
             LoginView()
         }

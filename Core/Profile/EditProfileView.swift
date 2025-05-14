@@ -9,12 +9,10 @@ import SwiftUI
 
 struct EditProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
-    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
-            Color(.systemGroupedBackground)
-                .ignoresSafeArea()
+            Color(.systemGroupedBackground).ignoresSafeArea()
             VStack {
                 HStack(alignment: .top) {
                     InputView(text: $viewModel.name, title: "Name", placeholder: "Kobe")
@@ -43,9 +41,7 @@ struct EditProfileView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                Button("Cancel") {
-                    dismiss()
-                }
+                CancelButtonView(fontSize: .footnote, fontColor: Color(.label))
             }
             
             ToolbarItem(placement: .topBarTrailing) {

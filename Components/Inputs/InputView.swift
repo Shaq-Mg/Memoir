@@ -33,7 +33,7 @@ struct InputView: View {
                 TextField(placeholder, text: $text)
             }
         }
-        .font(.caption)
+        .font(.body)
     }
 }
 
