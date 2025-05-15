@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ClientFormView: View {
     @StateObject private var vm = ClientFormViewModel()
+    @EnvironmentObject private var clientVM: ClientViewModel
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -43,6 +44,7 @@ struct ClientFormView: View {
 #Preview {
     NavigationStack {
         ClientFormView()
+            .environmentObject(ClientViewModel())
     }
 }
 
@@ -51,6 +53,7 @@ extension ClientFormView {
         Button {
             if !vm.name.isEmpty && !vm.phoneNumber.isEmpty {
                 Task { try await vm.save() }
+                Task { try await clientVM.fetch() }
                 dismiss()
             }
         } label: {

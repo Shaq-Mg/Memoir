@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClientView: View {
-    @StateObject private var manager = ClientManager()
+    @StateObject private var vm = ClientViewModel()
     @State private var presentClientFormView = false
     @State private var presentFavourites = false
     @Binding var showSideMenu: Bool
@@ -18,13 +18,14 @@ struct ClientView: View {
             AppHeaderView(showSideMenu: $showSideMenu, title: "Clients")
             clientListHeader
             
-            if manager.clients.isEmpty {
+            if vm.clients.isEmpty {
                 ScrollView {
                     LoadingView(title: "Fetching clients")
                         .padding(.top, 72)
                 }
             } else {
-                ClientListView(presentFavourites: $presentFavourites, showSideMenu: $showSideMenu, manager: manager)
+                ClientListView(presentFavourites: $presentFavourites, showSideMenu: $showSideMenu)
+                    .environmentObject(vm)
             }
         }
         .font(.title2)
@@ -37,6 +38,7 @@ struct ClientView: View {
         .sheet(isPresented: $presentClientFormView, content: {
             NavigationStack {
                 ClientFormView()
+                    .environmentObject(vm)
                     .presentationBackgroundInteraction(.enabled(upThrough: .height(250)))
             }
         })
@@ -60,7 +62,7 @@ extension ClientView {
                 Image(systemName: presentFavourites ? "heart.fill" : "heart")
                     .font(.system(size: 22))
                     .foregroundStyle(presentFavourites ? Color.accentColor : Color(.label))
-            }).disabled(manager.favouriteClients.isEmpty)
+            }).disabled(vm.favouriteClients.isEmpty)
             
             Spacer()
             
@@ -77,7 +79,7 @@ extension ClientView {
     
     private var searchSection: some View {
         HStack {
-            SearchBarView(searchText: $manager.searchText)
+            SearchBarView(searchText: $vm.searchText)
             Button {
                 presentClientFormView.toggle()
             } label: {

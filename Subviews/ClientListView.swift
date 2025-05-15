@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ClientListView: View {
+    @EnvironmentObject private var vm: ClientViewModel
     @Binding var presentFavourites: Bool
     @Binding var showSideMenu: Bool
-    var manager: ClientManager
     
     var body: some View {
         ZStack {
             if presentFavourites {
                 List {
-                    ForEach(manager.favouriteClients) { client in
+                    ForEach(vm.favouriteClients) { client in
                         ZStack {
                             NavigationLink {
                                 ClientDetailView(showSideMenu: $showSideMenu, client: client)
-                                    .environmentObject(manager)
+                                    .environmentObject(vm)
                             } label: {
                                 EmptyView()
                             }.opacity(0)
@@ -31,11 +31,11 @@ struct ClientListView: View {
                 .listStyle(.plain)
             } else {
                 List {
-                    ForEach(!manager.searchText.isEmpty ? manager.filteredClients : manager.clients) { client in
+                    ForEach(!vm.searchText.isEmpty ? vm.filteredClients : vm.clients) { client in
                         ZStack {
                             NavigationLink {
                                 ClientDetailView(showSideMenu: $showSideMenu, client: client)
-                                    .environmentObject(manager)
+                                    .environmentObject(vm)
                             } label: {
                                 EmptyView()
                             }.opacity(0)
@@ -50,6 +50,6 @@ struct ClientListView: View {
 }
 
 #Preview {
-    let manager = ClientManager()
-    ClientListView(presentFavourites: .constant(false), showSideMenu: .constant(false), manager: manager)
+    ClientListView(presentFavourites: .constant(false), showSideMenu: .constant(false))
+        .environmentObject(ClientViewModel())
 }

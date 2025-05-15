@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ClientDetailView: View {
-    @StateObject private var vm = ClientDetailViewModel()
+    @EnvironmentObject private var vm: ClientViewModel
     @Environment(\.dismiss) private var dismiss
     @Binding var showSideMenu: Bool
     let client: Client
@@ -66,7 +66,7 @@ struct ClientDetailView: View {
 #Preview {
     NavigationStack {
         ClientDetailView(showSideMenu: .constant(false), client: Preview.dev.client)
-            .environmentObject(ClientManager())
+            .environmentObject(ClientViewModel())
     }
 }
 

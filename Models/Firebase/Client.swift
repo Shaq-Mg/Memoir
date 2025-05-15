@@ -22,11 +22,6 @@ struct Client: FirebaseModel {
         return name
     }
     
-    mutating func favouriteStatus() {
-        let currentValue = isFavourite
-        isFavourite = !currentValue
-    }
-    
     enum CodingKeys: String, CodingKey {
         case docId = "doc_id"
         case name = "name"

@@ -8,43 +8,31 @@
 import Firebase
 import FirebaseAuth
 
-@MainActor
-class ClientManager: ObservableObject {
-    @Published var searchText = ""
+class ClientManager: FirebaseService {
     
-    @Published var clients = [Client]()
-    @Published var favouriteClients = [Client]()
+    static let shared = ClientManager()
     
-    private let firebaseService = FirebaseService.shared
+    private init() { }
     
-    var filteredClients: [Client] {
-        guard !searchText.isEmpty else { return clients }
-        return clients.filter({ $0.name.localizedCaseInsensitiveContains(searchText)})
+    func create<T>(_ item: T, userId: String, collectionPath: String) async throws where T : CustomStringConvertible, T : Decodable, T : Encodable, T : Hashable, T : Identifiable {
+        _ = try FirebaseConstants.userDocument(userId: userId).collection(collectionPath).addDocument(from: item)
     }
     
-    init() {
-        searchText = ""
-        Task { try await fetch() }
-        Task { await fetchFavouriteClients() }
+    func fetchAll<T>(userId: String, collectionPath: String, orderBy: String) async throws -> [T] where T : CustomStringConvertible, T : Decodable, T : Encodable, T : Hashable, T : Identifiable {
+                let snapshot = try await FirebaseConstants.collectionPath(userId: userId, collectionId: collectionPath).order(by: orderBy).getDocuments()
+                return try snapshot.documents.compactMap { try $0.data(as: T.self) }
     }
     
-    func fetch() async throws {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        clients = try await firebaseService.fetchAll(userId: uid, collectionPath: "clients", orderBy: Client.CodingKeys.name.rawValue)
+    func load<T>(userId: String, collectionPath: String, docId: String) async throws -> T? where T : CustomStringConvertible, T : Decodable, T : Encodable, T : Hashable, T : Identifiable {
+                let doc = try await FirebaseConstants.collectionPath(userId: userId, collectionId: collectionPath).document(docId).getDocument()
+                return try doc.data(as: T.self)
     }
     
-    func fetchFavouriteClients() async {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        do {
-            let snapshot = try await FirebaseConstants.collectionPath(userId: uid, collectionId: "clients")
-                .whereField("is_favourite", isEqualTo: true)
-                .getDocuments()
-            
-            favouriteClients = try snapshot.documents.compactMap {
-                try $0.data(as: Client.self)
-            }
-        } catch {
-            print("Error fetching favourite clients: \(error.localizedDescription)")
-        }
+    func update(userId: String, collectionPath: String, docId: String, data: [String : Any]) async throws {
+        try await FirebaseConstants.collectionPath(userId: userId, collectionId: collectionPath).document(docId).updateData(data)
+    }
+    
+    func delete(userId: String, collectionPath: String, docId: String) async throws {
+        try await FirebaseConstants.collectionPath(userId: userId, collectionId: collectionPath).document(docId).delete()
     }
 }
