@@ -29,10 +29,6 @@ struct ClientView: View {
         }
         .font(.title2)
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            Task { try await manager.fetch() }
-            Task { await manager.fetchFavouriteClients() }
-        }
         .overlay(alignment: .bottomTrailing, content: {
             if !presentFavourites {
                 searchSection
@@ -41,7 +37,6 @@ struct ClientView: View {
         .sheet(isPresented: $presentClientFormView, content: {
             NavigationStack {
                 ClientFormView()
-                    .environmentObject(manager)
                     .presentationBackgroundInteraction(.enabled(upThrough: .height(250)))
             }
         })
@@ -59,8 +54,8 @@ extension ClientView {
         HStack {
             Button(action: {
                 withAnimation(.spring()) {
-                    Task { await manager.fetchFavouriteClients() }
-                    presentFavourites.toggle()                }
+                    presentFavourites.toggle()
+                }
             }, label: {
                 Image(systemName: presentFavourites ? "heart.fill" : "heart")
                     .font(.system(size: 22))

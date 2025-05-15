@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ClientDetailView: View {
-    @EnvironmentObject private var manager: ClientManager
+    @StateObject private var vm = ClientDetailViewModel()
     @Environment(\.dismiss) private var dismiss
     @Binding var showSideMenu: Bool
     let client: Client
@@ -16,9 +16,9 @@ struct ClientDetailView: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 18) {
-                    DetailRowView(title: "Name", placeholder: client.name, text: $manager.name)
-                    DetailRowView(title: "Phone Number", placeholder: String(client.phoneNumber), text: $manager.phoneNumber)
-                    DetailRowView(title: "Note", placeholder: client.note ?? "", text: $manager.note)
+                    DetailRowView(title: "Name", placeholder: client.name, text: $vm.name)
+                    DetailRowView(title: "Phone Number", placeholder: String(client.phoneNumber), text: $vm.phoneNumber)
+                    DetailRowView(title: "Note", placeholder: client.note ?? "n/a", text: $vm.note)
                     
                     isFavouriteButton
                 }
@@ -27,7 +27,7 @@ struct ClientDetailView: View {
             }
             
             Button(action: {
-                Task { try await manager.delete(clientToDelete: client) }
+                Task { try await vm.delete(clientToDelete: client) }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     dismiss()
                 }
@@ -40,10 +40,7 @@ struct ClientDetailView: View {
         .navigationTitle(client.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            manager.clearFormInformation()
-            Task { try await manager.load(type: client) }
-        }
+        .onAppear { Task { try await vm.load(type: client) } }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 CancelButtonView(fontSize: .headline, fontColor: Color(.darkGray))
@@ -51,16 +48,16 @@ struct ClientDetailView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    if !manager.name.isEmpty && !manager.phoneNumber.isEmpty {
-                        Task { try await manager.update(clientToUpdate: client) }
+                    if !vm.name.isEmpty && !vm.phoneNumber.isEmpty {
+                        Task { try await vm.update(clientToUpdate: client) }
                     }
                     dismiss()
                 } label: {
                     Text("Done")
                         .font(.headline)
                         .foregroundStyle(Color(.label))
-                }.disabled(manager.name.isEmpty && manager.phoneNumber.isEmpty)
-                    .opacity(manager.name.isEmpty && manager.phoneNumber.isEmpty ? 0.2 : 1.0)
+                }.disabled(vm.name.isEmpty && vm.phoneNumber.isEmpty)
+                    .opacity(vm.name.isEmpty && vm.phoneNumber.isEmpty ? 0.2 : 1.0)
             }
         }
     }

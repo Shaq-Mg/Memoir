@@ -26,6 +26,8 @@
 		460392432DD12C2500A99290 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460392422DD12C2500A99290 /* EditProfileView.swift */; };
 		4603925B2DD137E400A99290 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603925A2DD137E400A99290 /* InputView.swift */; };
 		4603925D2DD13CAD00A99290 /* CircularProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603925C2DD13CAD00A99290 /* CircularProfileView.swift */; };
+		460A39CF2DD5362B00C3B804 /* ClientFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460A39CE2DD5362B00C3B804 /* ClientFormViewModel.swift */; };
+		460A39D22DD5378A00C3B804 /* ClientDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460A39D12DD5378A00C3B804 /* ClientDetailViewModel.swift */; };
 		4633F1B12DCE324600FED778 /* MemoirApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4633F1B02DCE324600FED778 /* MemoirApp.swift */; };
 		4633F1B32DCE324600FED778 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4633F1B22DCE324600FED778 /* ContentView.swift */; };
 		465467242DD3EBB700A21BBE /* ClientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465467232DD3EBB700A21BBE /* ClientListView.swift */; };
@@ -77,6 +79,8 @@
 		460392422DD12C2500A99290 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		4603925A2DD137E400A99290 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		4603925C2DD13CAD00A99290 /* CircularProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProfileView.swift; sourceTree = "<group>"; };
+		460A39CE2DD5362B00C3B804 /* ClientFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientFormViewModel.swift; sourceTree = "<group>"; };
+		460A39D12DD5378A00C3B804 /* ClientDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDetailViewModel.swift; sourceTree = "<group>"; };
 		4633F1AD2DCE324600FED778 /* Memoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4633F1B02DCE324600FED778 /* MemoirApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoirApp.swift; sourceTree = "<group>"; };
 		4633F1B22DCE324600FED778 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -215,6 +219,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		460A39D02DD5363400C3B804 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				460A39D12DD5378A00C3B804 /* ClientDetailViewModel.swift */,
+				460A39CE2DD5362B00C3B804 /* ClientFormViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		4633F1A42DCE324600FED778 = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +341,7 @@
 				46A1C1E12DD3C1F20045E26D /* ClientDetailView.swift */,
 				46A1C1B72DD3BDA60045E26D /* ClientView.swift */,
 				465A9FA42DD25FF0005D5A8B /* Manager */,
+				460A39D02DD5363400C3B804 /* ViewModels */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -524,6 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				460A39CF2DD5362B00C3B804 /* ClientFormViewModel.swift in Sources */,
 				460392432DD12C2500A99290 /* EditProfileView.swift in Sources */,
 				46A1C1B82DD3BDA60045E26D /* ClientView.swift in Sources */,
 				4633F1B32DCE324600FED778 /* ContentView.swift in Sources */,
@@ -543,6 +558,7 @@
 				46A1C1FB2DD3C26F0045E26D /* ClientCellView.swift in Sources */,
 				4603923D2DD12A5E00A99290 /* UserService.swift in Sources */,
 				4603920B2DD1241F00A99290 /* User.swift in Sources */,
+				460A39D22DD5378A00C3B804 /* ClientDetailViewModel.swift in Sources */,
 				465A9F882DD25DB8005D5A8B /* FirebaseService.swift in Sources */,
 				460392412DD12BA800A99290 /* ProfileViewModel.swift in Sources */,
 				4603925B2DD137E400A99290 /* InputView.swift in Sources */,

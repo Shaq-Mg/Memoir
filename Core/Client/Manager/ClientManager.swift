@@ -10,15 +10,12 @@ import FirebaseAuth
 
 @MainActor
 class ClientManager: ObservableObject {
-    @Published var name = ""
-    @Published var phoneNumber = ""
-    @Published var note = ""
-    @Published var isFavourite = false
     @Published var searchText = ""
     
     @Published var clients = [Client]()
     @Published var favouriteClients = [Client]()
-    @Published var client: Client?
+    
+    private let firebaseService = FirebaseService.shared
     
     var filteredClients: [Client] {
         guard !searchText.isEmpty else { return clients }
@@ -26,47 +23,14 @@ class ClientManager: ObservableObject {
     }
     
     init() {
-        clearFormInformation()
-        Task { try await fetch() }
-    }
-    
-    func clearFormInformation() {
         searchText = ""
-        name = ""
-        phoneNumber = ""
-        note = ""
-        isFavourite = false
+        Task { try await fetch() }
+        Task { await fetchFavouriteClients() }
     }
     
     func fetch() async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        clients = try await FirebaseService.fetchAll(userId: uid, collectionPath: "clients", orderBy: Client.CodingKeys.name.rawValue)
-    }
-    
-    func load(type: Client) async throws {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        client = try await FirebaseService.load(userId: uid, collectionPath: "clients", docId: type.id)
-    }
-    
-    func save() async throws  {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let clientData = Client(name: name, phoneNumber: phoneNumber, note: note, isFavourite: isFavourite)
-        try await FirebaseService.create(clientData, userId: uid, collectionPath: "clients")
-        try await fetch()
-    }
-    
-    func delete(clientToDelete: Client) async throws {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        try await FirebaseService<Client>.delete(userId: uid, collectionPath: "clients", docId: clientToDelete.id)
-        try await fetch()
-    }
-    
-    func update(clientToUpdate: Client) async throws {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let data: [String: Any] = [Client.CodingKeys.name.rawValue: name, Client.CodingKeys.phoneNumber.rawValue: phoneNumber, Client.CodingKeys.note.rawValue: note, Client.CodingKeys.isFavourite.rawValue: isFavourite]
-        
-        try await FirebaseService<Client>.update(userId: uid, collectionPath: "clients", docId: clientToUpdate.id, data: data)
-        try await fetch()
+        clients = try await firebaseService.fetchAll(userId: uid, collectionPath: "clients", orderBy: Client.CodingKeys.name.rawValue)
     }
     
     func fetchFavouriteClients() async {
