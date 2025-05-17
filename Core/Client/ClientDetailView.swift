@@ -7,9 +7,9 @@
 import SwiftUI
 
 struct ClientDetailView: View {
-    @EnvironmentObject private var vm: ClientViewModel
+    @StateObject private var vm = ClientDetailViewModel()
+    @EnvironmentObject private var clientVM: ClientViewModel
     @Environment(\.dismiss) private var dismiss
-    @Binding var showSideMenu: Bool
     let client: Client
     
     var body: some View {
@@ -28,6 +28,7 @@ struct ClientDetailView: View {
             
             Button(action: {
                 Task { try await vm.delete(clientToDelete: client) }
+                Task { try await clientVM.fetch() }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     dismiss()
                 }
@@ -48,16 +49,16 @@ struct ClientDetailView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    if !vm.name.isEmpty && !vm.phoneNumber.isEmpty {
-                        Task { try await vm.update(clientToUpdate: client) }
-                    }
+                    Task { try await vm.update(clientToUpdate: client) }
+                    Task { try await clientVM.fetch() }
                     dismiss()
                 } label: {
                     Text("Done")
                         .font(.headline)
                         .foregroundStyle(Color(.label))
-                }.disabled(vm.name.isEmpty && vm.phoneNumber.isEmpty)
-                    .opacity(vm.name.isEmpty && vm.phoneNumber.isEmpty ? 0.2 : 1.0)
+                }
+                .disabled(!vm.isValid)
+                .opacity(vm.isValid ? 1.0 : 0.4)
             }
         }
     }
@@ -65,7 +66,7 @@ struct ClientDetailView: View {
 
 #Preview {
     NavigationStack {
-        ClientDetailView(showSideMenu: .constant(false), client: Preview.dev.client)
+        ClientDetailView(client: Preview.dev.client)
             .environmentObject(ClientViewModel())
     }
 }

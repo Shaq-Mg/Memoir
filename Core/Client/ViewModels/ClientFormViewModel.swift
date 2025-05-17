@@ -16,6 +16,11 @@ final class ClientFormViewModel: ObservableObject {
     
     private let manager = ClientManager.shared
     
+    var isFormValid: Bool {
+        return !name.isEmpty && !phoneNumber.isEmpty
+        && name.count >= 2 && phoneNumber.count == 11
+    }
+    
     init() {
         clearFormInformation()
     }

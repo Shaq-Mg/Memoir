@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct ServiceCellView: View {
+    let service: Service
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            HStack {
+                Text(service.title)
+                    .font(.body) .fontWeight(.semibold)
+                    .foregroundStyle(Color(.label))
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.footnote) .fontWeight(.semibold)
+                    .foregroundStyle(Color(.systemGray))
+            }
+        }
     }
 }
 
 #Preview {
-    ServiceCellView()
+    ServiceCellView(service: Preview.dev.service1)
 }

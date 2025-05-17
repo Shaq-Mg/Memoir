@@ -51,17 +51,15 @@ struct ClientFormView: View {
 extension ClientFormView {
     private var saveButton: some View {
         Button {
-            if !vm.name.isEmpty && !vm.phoneNumber.isEmpty {
-                Task { try await vm.save() }
-                Task { try await clientVM.fetch() }
-                dismiss()
-            }
+            Task { try await vm.save() }
+            Task { try await clientVM.fetch() }
+            dismiss()
         } label: {
             Text("Save")
                 .foregroundStyle(Color(.label))
         }
         .font(.headline)
-        .opacity(!vm.name.isEmpty && !vm.phoneNumber.isEmpty ? 1.0 : 0.2)
-        .disabled(vm.name.isEmpty && vm.phoneNumber.isEmpty)
+        .disabled(!vm.isFormValid)
+        .opacity(vm.isFormValid ? 1.0 : 0.4)
     }
 }

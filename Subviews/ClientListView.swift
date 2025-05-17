@@ -10,7 +10,6 @@ import SwiftUI
 struct ClientListView: View {
     @EnvironmentObject private var vm: ClientViewModel
     @Binding var presentFavourites: Bool
-    @Binding var showSideMenu: Bool
     
     var body: some View {
         ZStack {
@@ -19,7 +18,7 @@ struct ClientListView: View {
                     ForEach(vm.favouriteClients) { client in
                         ZStack {
                             NavigationLink {
-                                ClientDetailView(showSideMenu: $showSideMenu, client: client)
+                                ClientDetailView(client: client)
                                     .environmentObject(vm)
                             } label: {
                                 EmptyView()
@@ -34,7 +33,7 @@ struct ClientListView: View {
                     ForEach(!vm.searchText.isEmpty ? vm.filteredClients : vm.clients) { client in
                         ZStack {
                             NavigationLink {
-                                ClientDetailView(showSideMenu: $showSideMenu, client: client)
+                                ClientDetailView(client: client)
                                     .environmentObject(vm)
                             } label: {
                                 EmptyView()
@@ -50,6 +49,6 @@ struct ClientListView: View {
 }
 
 #Preview {
-    ClientListView(presentFavourites: .constant(false), showSideMenu: .constant(false))
+    ClientListView(presentFavourites: .constant(false))
         .environmentObject(ClientViewModel())
 }

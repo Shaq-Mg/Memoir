@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var isMenuShowing = false
     var body: some View {
         if viewModel.userSession != nil {
-            ClientView(showSideMenu: $isMenuShowing)
+            CalenderView(showSideMenu: $isMenuShowing)
         } else {
             LoginView()
         }

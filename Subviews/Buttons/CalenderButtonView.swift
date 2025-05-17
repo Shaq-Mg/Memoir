@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct CalenderButtonView: View {
+    let imageName: String
+    let action: () -> ()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            withAnimation {
+                action()
+            }
+        } label: {
+            Image(systemName: imageName)
+        }
     }
 }
 
 #Preview {
-    CalenderButtonView()
+    CalenderButtonView(imageName: "chevron.left") { }
 }

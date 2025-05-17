@@ -1,5 +1,5 @@
 //
-//  ServiceDetailView.swift
+//  EditServiceView.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 15/05/2025.
@@ -10,24 +10,24 @@ import SwiftUI
 struct EditServiceView: View {
     @StateObject private var editVM = EditServiceViewModel()
     @EnvironmentObject private var vm: ServiceViewModel
-    @Binding var showSideMenu: Bool
     @Environment(\.dismiss) private var dismiss
     let service: Service
     
     var body: some View {
         VStack {
-            MainHeaderView(showSideMenu: $showSideMenu, onDismiss: true, title: service.title)
-                .padding(.bottom, 24)
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 18) {
-                    InputDetailView(title: "Title", description: service.title)
-                    InputDetailView(title: "Price", description: "£" + String(service.price))
+                    DetailRowView(title: "Title", placeholder: service.title, text: $editVM.title)
+                    DetailRowView(title: "Price", placeholder: "£\(service.price)", text: $editVM.price)
+                        .keyboardType(.numberPad)
                 }
                 .padding(.horizontal)
+                .padding(.top, 44)
             }
             
             Button(action: {
-                vm.delete(toDelete: service)
+                Task { try await editVM.delete(for: service) }
+                Task { try await vm.fetchServices() }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     dismiss()
                 }
@@ -37,15 +37,35 @@ struct EditServiceView: View {
                     .foregroundStyle(.accent)
             })
         }
+        .navigationTitle("Edit Service")
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                CancelButtonView(fontSize: .headline, fontColor: Color(.darkGray))
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    Task { try await editVM.update(for: service) }
+                    Task { try await vm.fetchServices() }
+                    dismiss()
+                } label: {
+                    Text("Done")
+                        .font(.headline)
+                        .foregroundStyle(Color(.darkGray))
+                }
+                .disabled(!editVM.isValid)
+                .opacity(editVM.isValid ? 1.0 : 0.4)
+            }
+        }
     }
 }
 
 #Preview {
     NavigationStack {
-        EditServiceView(showSideMenu: .constant(false), service: Preview.dev.service1)
-            .environmentObject(ServiceViewModel())
+        EditServiceView(service: Preview.dev.service1)
+            .environmentObject(EditServiceViewModel())
     }
 }
 

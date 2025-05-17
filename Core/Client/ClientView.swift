@@ -15,7 +15,7 @@ struct ClientView: View {
     
     var body: some View {
         VStack {
-            AppHeaderView(showSideMenu: $showSideMenu, title: "Clients")
+            MenuHeaderView(showSideMenu: $showSideMenu, title: "Clients")
             clientListHeader
             
             if vm.clients.isEmpty {
@@ -24,7 +24,7 @@ struct ClientView: View {
                         .padding(.top, 72)
                 }
             } else {
-                ClientListView(presentFavourites: $presentFavourites, showSideMenu: $showSideMenu)
+                ClientListView(presentFavourites: $presentFavourites)
                     .environmentObject(vm)
             }
         }
