@@ -1,5 +1,5 @@
 //
-//  ClientManager.swift
+//  FirebaseManager.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 12/05/2025.
@@ -8,9 +8,9 @@
 import Firebase
 import FirebaseAuth
 
-class ClientManager: FirebaseService {
+class FirebaseManager: FirebaseService {
     
-    static let shared = ClientManager()
+    static let shared = FirebaseManager()
     
     private init() { }
     
