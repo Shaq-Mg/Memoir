@@ -1,18 +1,18 @@
 //
-//  ChartAnnotation.swift
+//  Next7Days.swift
 //  Memoir
 //
-//  Created by Shaquille McGregor on 24/05/2025.
+//  Created by Shaquille McGregor on 02/06/2025.
 //
 
 import SwiftUI
 
-struct ChartAnnotation: View {
+struct Next7Days: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    ChartAnnotation()
+    Next7Days()
 }

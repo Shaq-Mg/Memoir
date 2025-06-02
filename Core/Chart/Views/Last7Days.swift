@@ -1,18 +1,18 @@
 //
-//  ChartPickerView.swift
+//  Last7Days.swift
 //  Memoir
 //
-//  Created by Shaquille McGregor on 24/05/2025.
+//  Created by Shaquille McGregor on 02/06/2025.
 //
 
 import SwiftUI
 
-struct ChartPickerView: View {
+struct Last7Days: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    ChartPickerView()
+    Last7Days()
 }
