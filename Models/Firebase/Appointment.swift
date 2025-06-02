@@ -11,16 +11,26 @@ struct Appointment: FirebaseModel {
     @DocumentID var id: String?
     let name: String
     let description: String
-    let earnings: Double
-    let date: Date
-    let time: Date
+    let amount: Double
+    var date: Date // Just date, no time component
+    var time: Date  // Timestamp with full date+time
     
     enum CodingKeys: String, CodingKey {
         case id
         case name
         case description
-        case earnings
+        case amount
         case date
         case time
+    }
+}
+
+// Data model for chart selection state
+enum ChartState: String, Identifiable, CaseIterable {
+    case next7Days = "This week"
+    case last7Days = "Last week"
+    
+    var id: String {
+        return rawValue
     }
 }

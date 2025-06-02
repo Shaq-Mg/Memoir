@@ -16,16 +16,17 @@ struct TimePickerView: View {
             if !vm.availableTimes.isEmpty {
                 Picker("Select Time", selection: $vm.selectedTime) {
                     ForEach(vm.availableTimes, id: \.self) { time in
-                        Text(vm.timeFormatter.string(from: time)).tag(time as Date?)
+                        Text(AppointmentManager.shared.timeFormatter.string(from: time))
+                            .tag(time as Date?)
                     }
                 }
                 .pickerStyle(WheelPickerStyle())
-                .frame(maxHeight: 200)
                 
             } else {
                 Text("No available times for this date")
             }
         }
+        .frame(maxHeight: 250)
     }
 }
 

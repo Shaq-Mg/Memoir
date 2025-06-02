@@ -15,7 +15,7 @@ class ClientViewModel: ObservableObject {
     @Published var clients = [Client]()
     @Published var favouriteClients = [Client]()
     
-    private let manager = ClientManager.shared
+    private let firebaseManager = FirebaseManager.shared
     
     var filteredClients: [Client] {
         guard !searchText.isEmpty else { return clients }
@@ -30,7 +30,7 @@ class ClientViewModel: ObservableObject {
     
     func fetch() async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        clients = try await manager.fetchAll(userId: uid, collectionPath: "clients", orderBy: Client.CodingKeys.name.rawValue)
+        clients = try await firebaseManager.fetchAll(userId: uid, collectionPath: "clients", orderBy: Client.CodingKeys.name.rawValue)
     }
     
     func fetchFavouriteClients() async {

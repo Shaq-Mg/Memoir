@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct ResetButtonView: View {
+    @EnvironmentObject private var vm: FormViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            withAnimation(.easeOut) {
+                vm.resetFormInformation()
+            }
+        } label: {
+            Text("Reset")
+                .font(.callout)
+                .foregroundStyle(Color(.darkGray))
+        }
+        .padding(.trailing)
     }
 }
 
 #Preview {
     ResetButtonView()
+        .environmentObject(FormViewModel())
 }

@@ -14,7 +14,7 @@ final class ClientFormViewModel: ObservableObject {
     @Published var note = ""
     @Published var isFavourite = false
     
-    private let manager = ClientManager.shared
+    private let firebaseManager = FirebaseManager.shared
     
     var isFormValid: Bool {
         return !name.isEmpty && !phoneNumber.isEmpty
@@ -35,6 +35,6 @@ final class ClientFormViewModel: ObservableObject {
     func save() async throws  {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let clientData = Client(name: name, phoneNumber: phoneNumber, note: note, isFavourite: isFavourite)
-        try await manager.create(clientData, userId: uid, collectionPath: "clients")
+        try await firebaseManager.create(clientData, userId: uid, collectionPath: "clients")
     }
 }

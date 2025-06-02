@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct TimeSlot: Identifiable, Equatable {
+    let id = UUID()
+    let time: Date
+}

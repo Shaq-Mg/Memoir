@@ -32,7 +32,7 @@ struct BookedView: View {
                 Button {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         dismiss()
-                        vm.removeFormInformation()
+                        vm.resetFormInformation()
                     }
                 } label: {
                     Text("Done")

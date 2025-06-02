@@ -8,7 +8,7 @@
 import Firebase
 import FirebaseAuth
 
-class FirebaseManager: FirebaseService {
+class FirebaseManager: FirebaseServiceDelegate {
     
     static let shared = FirebaseManager()
     

@@ -21,23 +21,27 @@ struct FormView: View {
             Spacer()
             VStack(spacing: 25) {
                 FormInputView(text: $vm.name, title: "Name", placeholder: "Name") { presentNameField.toggle() }
-                    .overlay(alignment: .trailing) { clearButton }
+                    .overlay(alignment: .trailing)
+                { ResetButtonView().environmentObject(vm).padding(.top, 24) }
                 DropDownMenu(service: $vm.selectedSerivce, animate: $presentSelectionSheet, title: "Service", prompt: "None") { presentSelectionSheet.toggle() }
                 
                 TimePickerView()
                     .environmentObject(vm)
                 
                 confirmButton
-                if let time = vm.selectedTime {
+                if vm.selectedTime != nil {
                     
-                    Text(time.dayViewDateFormat())
+                    Text(vm.selectedTime?.dayViewDateFormat() ?? "")
                         .foregroundStyle(Color(.darkGray))
                 }
             }
             .padding(.horizontal)
             .onAppear {
-                vm.generateAvailableTimes(currentDate)
-                vm.removeFormInformation()
+                vm.resetFormInformation()
+                Task { await vm.loadAvailableTimes(currentDate) }
+            }
+            .onChange(of: currentDate) { _, _ in
+                Task { await vm.loadAvailableTimes(currentDate) }
             }
             .alert("Enter Name", isPresented: $presentNameField) {
                 TextField("Name", text: $vm.name)
@@ -55,6 +59,14 @@ struct FormView: View {
                         .environmentObject(vm)
                 }
             }
+            .confirmationDialog("Confirm Appointment", isPresented: $vm.showConfirmationAlert, titleVisibility: .visible) {
+                Button("Yes") {
+                    Task { try await vm.book(for: currentDate) }
+                    isBooked.toggle()
+                }
+            } message: {
+                Text("Do you want to book appointment for this date?")
+            }
             Spacer()
         }
     }
@@ -68,34 +80,16 @@ struct FormView: View {
 
 private extension FormView {
     
-    private var clearButton: some View {
-        Button {
-            withAnimation(.easeInOut) {
-                vm.removeFormInformation()
-            }
-        } label: {
-            Image(systemName: "xmark.circle")
-                .imageScale(.large).bold()
-                .foregroundStyle(Color(.darkGray))
-        }
-        .padding(.top, 26).padding(.trailing)
-    }
-    
     private var confirmButton: some View {
         Button("Confirm") {
-            Task { try await vm.book(for: currentDate) }
-            isBooked.toggle()
+            vm.showConfirmationAlert.toggle()
         }
         .foregroundStyle(Color(.white))
         .font(.headline)
         .frame(maxWidth: .infinity)
         .padding(10)
         .background(RoundedRectangle(cornerRadius: 8).fill(.accent))
-        .opacity(formValidation ? 1.0 : 0.5)
-        .disabled(formValidation)
-    }
-    
-    private var formValidation: Bool {
-        return !vm.name.isEmpty && vm.selectedTime != nil && vm.selectedSerivce != nil
+        .opacity(vm.formValidation ? 1.0 : 0.5)
+        .disabled(!vm.formValidation)
     }
 }

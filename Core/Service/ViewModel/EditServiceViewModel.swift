@@ -14,7 +14,7 @@ class EditServiceViewModel: ObservableObject {
     
     @Published var selectedService: Service?
     
-    private let manager = ServiceManager.shared
+    private let firebaseManager = FirebaseManager.shared
     
     var isValid: Bool {
         return !title.isEmpty && !price.isEmpty
@@ -32,18 +32,18 @@ class EditServiceViewModel: ObservableObject {
     
     func load(_ type: Service) async throws {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        selectedService = try await manager.load(userId: userId, collectionPath: "serivces", docId: type.id)
+        selectedService = try await firebaseManager.load(userId: userId, collectionPath: "serivces", docId: type.id)
     }
     
     func delete(for docToDelete: Service) async throws {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        try await manager.delete(userId: userId, collectionPath: "services", docId: docToDelete.docId ?? "")
+        try await firebaseManager.delete(userId: userId, collectionPath: "services", docId: docToDelete.docId ?? "")
     }
     
     func update(for docToUpdate: Service) async throws {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data: [String: Any] = [Service.CodingKeys.title.rawValue: title,
                                    Service.CodingKeys.price.rawValue: price]
-        try await manager.update(userId: userId, collectionPath: "services", docId: docToUpdate.docId ?? "", data: data)
+        try await firebaseManager.update(userId: userId, collectionPath: "services", docId: docToUpdate.docId ?? "", data: data)
     }
 }

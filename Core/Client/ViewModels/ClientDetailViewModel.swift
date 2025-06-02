@@ -17,7 +17,7 @@ class ClientDetailViewModel: ObservableObject {
     
     @Published var selectedClient: Client?
     
-    private let manager = ClientManager.shared
+    private let firebaseManager = FirebaseManager.shared
     
     var isValid: Bool {
         return !name.isEmpty && !phoneNumber.isEmpty
@@ -37,20 +37,20 @@ class ClientDetailViewModel: ObservableObject {
     
     func load(type: Client) async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        selectedClient = try await manager.load(userId: uid, collectionPath: "clients", docId: type.id)
+        selectedClient = try await firebaseManager.load(userId: uid, collectionPath: "clients", docId: type.id)
         clearInformation()
     }
     
     func delete(clientToDelete: Client) async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        try await manager.delete(userId: uid, collectionPath: "clients", docId: clientToDelete.id)
+        try await firebaseManager.delete(userId: uid, collectionPath: "clients", docId: clientToDelete.id)
     }
     
     func update(clientToUpdate: Client) async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let data: [String: Any] = [Client.CodingKeys.name.rawValue: name, Client.CodingKeys.phoneNumber.rawValue: phoneNumber, Client.CodingKeys.note.rawValue: note, Client.CodingKeys.isFavourite.rawValue: isFavourite]
         
-        try await manager.update(userId: uid, collectionPath: "clients", docId: clientToUpdate.id, data: data)
+        try await firebaseManager.update(userId: uid, collectionPath: "clients", docId: clientToUpdate.id, data: data)
     }
 }
 
