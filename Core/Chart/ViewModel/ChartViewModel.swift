@@ -20,17 +20,20 @@ final class ChartViewModel: ObservableObject {
     }
     
     var previousWeekData: [(date: Date, count: Int)] {
-        ChartManager.fetchPreviousAppts(appointments)
+        chartManager.fetchPreviousAppts(appointments)
     }
     
-    init() {
+    private let chartManager: ChartManager
+    
+    init(chartManager: ChartManager) {
+        self.chartManager = chartManager
         Task { try await fetchAppointments() }
     }
     
     // Fetch appointments to update array for chart UI
     private func fetchAppointments() async throws {
         do {
-            appointments = try await ChartManager.fetchAppointments()
+            appointments = try await chartManager.fetchAppointments()
         } catch {
             print("DEBUG: ERROR fetching appointments \(error.localizedDescription)")
         }
@@ -51,15 +54,23 @@ final class ChartViewModel: ObservableObject {
         }
     }
     
-    func calculateTotalEarnings(from appts: [Appointment]) -> Double {
-        appts.reduce(0) { $0 + $1.amount }
+    // Function to Calculate Total Earnings (Next 7 Days)
+    func totalEarningsNext7Days() -> Double {
+        chartManager.getNext7DaysEarnings(appointments)
     }
     
-    func generateLast7daysEarnings() {
-        Task { appointments = try await ChartManager.generateDailyEarnings(value: -7) }
+    // Function to Calculate Total Earnings (Last 7 Days)
+    func totalEarningsLast7Days() -> Double {
+        chartManager.getLast7DaysEarnings(appointments)
     }
     
-    func generateNext7daysEarnings() {
-        Task { appointments = try await  ChartManager.generateDailyEarnings(value: 7) }
+    func fetchLast7daysData() {
+        Task { try await fetchAppointments() }
+        Task { appointments = try await chartManager.generateDailyEarnings(value: -7) }
+    }
+    
+    func fetchNext7daysData() {
+        Task { try await fetchAppointments() }
+        Task { appointments = try await  chartManager.generateDailyEarnings(value: 7) }
     }
 }

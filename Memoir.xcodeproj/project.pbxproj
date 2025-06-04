@@ -55,6 +55,7 @@
 		461D24CB2DD91E0800BE4F78 /* BookedRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D24CA2DD91E0800BE4F78 /* BookedRowView.swift */; };
 		461D24E42DD922F800BE4F78 /* SelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D24E32DD922F800BE4F78 /* SelectionSheet.swift */; };
 		461E20A22DE123C90084A809 /* BookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E20A12DE123C90084A809 /* BookingView.swift */; };
+		4623628A2DEF7E6A00DFAE1F /* ChartStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462362892DEF7E6900DFAE1F /* ChartStateView.swift */; };
 		4630BF792DEE21500008F1DC /* Last7Days.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4630BF782DEE21500008F1DC /* Last7Days.swift */; };
 		4630BF7C2DEE21980008F1DC /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4630BF7B2DEE21980008F1DC /* ChartViewModel.swift */; };
 		4630BF9F2DEE26C00008F1DC /* Next7Days.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4630BF9E2DEE26C00008F1DC /* Next7Days.swift */; };
@@ -147,6 +148,7 @@
 		461D24CA2DD91E0800BE4F78 /* BookedRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedRowView.swift; sourceTree = "<group>"; };
 		461D24E32DD922F800BE4F78 /* SelectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionSheet.swift; sourceTree = "<group>"; };
 		461E20A12DE123C90084A809 /* BookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingView.swift; sourceTree = "<group>"; };
+		462362892DEF7E6900DFAE1F /* ChartStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStateView.swift; sourceTree = "<group>"; };
 		4630BF782DEE21500008F1DC /* Last7Days.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Last7Days.swift; sourceTree = "<group>"; };
 		4630BF7B2DEE21980008F1DC /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		4630BF9E2DEE26C00008F1DC /* Next7Days.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Next7Days.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 		4630BF762DEE20FA0008F1DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				462362892DEF7E6900DFAE1F /* ChartStateView.swift */,
 				4630BF782DEE21500008F1DC /* Last7Days.swift */,
 				4630BF9E2DEE26C00008F1DC /* Next7Days.swift */,
 			);
@@ -820,6 +823,7 @@
 				461E20A22DE123C90084A809 /* BookingView.swift in Sources */,
 				466C24102DE2193F0048285F /* ChartManager.swift in Sources */,
 				46A1C2142DD3C5E60045E26D /* CancelButtonView.swift in Sources */,
+				4623628A2DEF7E6A00DFAE1F /* ChartStateView.swift in Sources */,
 				4603925D2DD13CAD00A99290 /* CircularProfileView.swift in Sources */,
 				46A1C22C2DD3D0FC0045E26D /* DetailRowView.swift in Sources */,
 				461D24E42DD922F800BE4F78 /* SelectionSheet.swift in Sources */,

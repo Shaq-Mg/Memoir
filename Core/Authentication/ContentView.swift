@@ -10,9 +10,11 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
     @State private var isMenuShowing = false
+    private let chartManager = ChartManager()
+    
     var body: some View {
         if viewModel.userSession != nil {
-            CalenderView(showSideMenu: $isMenuShowing)
+            ChartStateView(chartManager: chartManager)
         } else {
             LoginView()
         }

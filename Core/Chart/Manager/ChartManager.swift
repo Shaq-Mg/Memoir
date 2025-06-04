@@ -10,20 +10,18 @@ import FirebaseFirestore
 
 final class ChartManager {
     
-    static let apptCollection = "appointments"
-    static let firebaseManager = FirebaseManager.shared
-    
-    private init() { }
+    private let apptCollection = "appointments"
+    private let firebaseManager = FirebaseManager.shared
     
     // Function to fetch all appointments
-    static func fetchAppointments() async throws -> [Appointment] {
+    func fetchAppointments() async throws -> [Appointment] {
         guard let uid = Auth.auth().currentUser?.uid else { return [] }
         let snapshot = try await FirebaseConstants.collectionPath(userId: uid, collectionId: apptCollection).getDocuments()
         return try snapshot.documents.compactMap { try $0.data(as: Appointment.self) }
     }
     
     // Function to Calculate Appointment Counts for the Previous 7 Days
-    static func fetchPreviousAppts(_ appts: [Appointment]) -> [(date: Date, count: Int)] {
+    func fetchPreviousAppts(_ appts: [Appointment]) -> [(date: Date, count: Int)] {
         let today = Calendar.current.startOfDay(for: Date())
         let last7Days = (0..<7).map { Calendar.current.date(byAdding: .day, value: -$0, to: today)! }
         
@@ -34,7 +32,7 @@ final class ChartManager {
     }
     
     // Fetch appointments to display daily earnings for chart date
-    static func generateDailyEarnings(value: Int) async throws -> [Appointment] {
+    func generateDailyEarnings(value: Int) async throws -> [Appointment] {
         guard let uid = Auth.auth().currentUser?.uid else { return [] }
         
         let calendar = Calendar.current
@@ -51,7 +49,7 @@ final class ChartManager {
     }
     
     // Function to generate earnings for chart header
-    static func generateTotalEarnings(value: Int) async throws -> [Appointment] {
+    func generateTotalEarnings(value: Int) async throws -> [Appointment] {
         guard let uid = Auth.auth().currentUser?.uid else { return [] }
         
         let calendar = Calendar.current
@@ -65,5 +63,40 @@ final class ChartManager {
         return try querySnapshot.documents.compactMap { doc in
             try doc.data(as: Appointment.self)
         }
+    }
+}
+
+extension ChartManager {
+    
+    func getNext7DaysEarnings(_ appts: [Appointment]) -> Double {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        guard let endDate = calendar.date(byAdding: .day, value: 7, to: today) else { return 0.0 }
+        
+        let earnings = appts
+            .filter { appointment in
+                guard let appointmentDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: appointment.date) else {
+                    return false
+                }
+                return appointmentDate >= today && appointmentDate < endDate
+            }
+            .reduce(0) { $0 + $1.amount }
+        
+        return earnings
+    }
+    
+    func getLast7DaysEarnings(_ appts: [Appointment]) -> Double {
+        let calendar = Calendar.current
+        let now = Date()
+        guard let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: now) else {
+            return 0.0
+        }
+        
+        let recentAppointments = appts.filter {
+            $0.date >= sevenDaysAgo && $0.date <= now
+        }
+        
+        let total = recentAppointments.reduce(0.0) { $0 + $1.amount }
+        return total
     }
 }

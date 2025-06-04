@@ -16,14 +16,14 @@ struct Next7Days: View {
     
     var body: some View {
         VStack(spacing: 14) {
-            ChartHeaderView(chartState: $chartState, earnings: vm.calculateTotalEarnings(from: vm.appointments))
+            ChartHeaderView(chartState: $chartState, earnings: vm.totalEarningsNext7Days())
             // Chart View
             Chart {
                 if let selectedDate = vm.selectedDate {
                     RuleMark(x: .value("Selected Day", selectedDate.date, unit: .day))
                         .foregroundStyle(Color(.darkGray).opacity(0.3))
                         .annotation(position: .top, overflowResolution: .init(x: .fit(to: .chart), y: .disabled)) {
-                            ChartAnnotation(date: selectedDate.date, earnings: vm.calculateTotalEarnings(from: vm.appointments))
+                            ChartAnnotation(date: selectedDate.date, earnings: selectedDate.amount)
                         }
                 }
                 
@@ -46,12 +46,12 @@ struct Next7Days: View {
             .frame(height: 180)
             ChartPickerView(chartState: $chartState)
         }
-        .onAppear { vm.generateNext7daysEarnings() }
     }
 }
 
 #Preview {
+    let chartManager = ChartManager()
     Next7Days(chartState: .constant(.next7Days), selectedOption: .constant(.next7Days))
-        .environmentObject(ChartViewModel())
+        .environmentObject(ChartViewModel(chartManager: chartManager))
 }
 

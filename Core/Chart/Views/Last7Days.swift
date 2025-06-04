@@ -15,7 +15,7 @@ struct Last7Days: View {
     
     var body: some View {
         VStack(spacing: 14) {
-            ChartHeaderView(chartState: $chartState, earnings: vm.calculateTotalEarnings(from: vm.appointments))
+            ChartHeaderView(chartState: $chartState, earnings: vm.totalEarningsLast7Days())
             // Chart View
             Chart {
                 if let selectedDate = vm.selectedDate {
@@ -44,12 +44,12 @@ struct Last7Days: View {
             }
             ChartPickerView(chartState: $chartState)
         }
-        .onAppear { vm.generateLast7daysEarnings() }
     }
 }
 
 #Preview {
+    let chartManager = ChartManager()
     Last7Days(chartState: .constant(.last7Days), selectedOption: .constant(.last7Days))
-        .environmentObject(ChartViewModel())
+        .environmentObject(ChartViewModel(chartManager: chartManager))
 }
 
