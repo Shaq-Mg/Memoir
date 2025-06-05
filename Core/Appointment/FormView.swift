@@ -61,7 +61,7 @@ struct FormView: View {
             }
             .confirmationDialog("Confirm Appointment", isPresented: $vm.showConfirmationAlert, titleVisibility: .visible) {
                 Button("Yes") {
-                    Task { try await vm.book(for: currentDate) }
+                    Task { try await vm.bookAppointments(for: currentDate) }
                     isBooked.toggle()
                 }
             } message: {
