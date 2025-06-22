@@ -48,8 +48,7 @@ struct Last7Days: View {
 }
 
 #Preview {
-    let chartManager = ChartManager()
     Last7Days(chartState: .constant(.last7Days), selectedOption: .constant(.last7Days))
-        .environmentObject(ChartViewModel(chartManager: chartManager))
+        .environmentObject(ChartViewModel())
 }
 

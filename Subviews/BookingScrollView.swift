@@ -8,11 +8,38 @@
 import SwiftUI
 
 struct BookingScrollView: View {
+    @StateObject var viewModel: ChartViewModel
+    @State private var selectedItem: Appointment?
+    @State private var isSelected = false
+    @Binding var currentDate: Date
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if viewModel.upcomingAppts.isEmpty {
+                LoadingView(title: "No appointments scheduled")
+            } else {
+                LazyVStack(spacing: 16) {
+                    ForEach(viewModel.upcomingAppts) { appt in
+                        Button {
+                            selectedItem = appt
+                            isSelected.toggle()
+                        } label: {
+                            BookingCard(selectedItem: $selectedItem, appt: appt)
+                        }
+                        .scaleEffect(selectedItem == appt ? 1.0 : 0.9)
+                        .sheet(isPresented: $isSelected) {
+                            NavigationStack {
+                                BookingSheet(appt: appt)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .onAppear { viewModel.fetchUpcomingAppointments() }
     }
 }
 
 #Preview {
-    BookingScrollView()
+    BookingScrollView(viewModel: ChartViewModel(), currentDate: .constant(Date()))
 }

@@ -59,14 +59,15 @@ struct FormView: View {
                         .environmentObject(vm)
                 }
             }
-            .confirmationDialog("Confirm Appointment", isPresented: $vm.showConfirmationAlert, titleVisibility: .visible) {
-                Button("Yes") {
+            .alert("Confirm Appointment", isPresented: $vm.showConfirmationAlert, actions: {
+                Button("Cancel", role: .destructive) { }
+                Button("Book") {
                     Task { try await vm.bookAppointments(for: currentDate) }
                     isBooked.toggle()
                 }
-            } message: {
-                Text("Do you want to book appointment for this date?")
-            }
+            }, message: {
+                Text("Are you sure that you want to book appointment for this date?")
+            })
             Spacer()
         }
     }

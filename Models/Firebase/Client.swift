@@ -9,9 +9,9 @@ import FirebaseFirestore
 
 struct Client: FirebaseModel {
     @DocumentID var docId: String?
-    let name: String
-    let phoneNumber: String
-    let note: String?
+    var name: String
+    var phoneNumber: String
+    var note: String?
     var isFavourite: Bool
     
     var id: String {

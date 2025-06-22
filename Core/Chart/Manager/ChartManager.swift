@@ -9,9 +9,23 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class ChartManager {
+    static let shared = ChartManager()
+    
+    private init() { }
     
     private let apptCollection = "appointments"
     private let firebaseManager = FirebaseManager.shared
+    
+    // Fetch upcoming appointments for chart view to display in order by date
+    func getUpcomingAppts() async throws -> [Appointment] {
+        guard let uid = Auth.auth().currentUser?.uid else { return [] }
+        let now = Date()
+        let snapshot = try await FirebaseConstants.collectionPath(userId: uid, collectionId: apptCollection)
+            .whereField(Appointment.CodingKeys.time.rawValue, isGreaterThan: now)
+            .order(by: Appointment.CodingKeys.time.rawValue)
+            .limit(to: 5).getDocuments()
+        return try snapshot.documents.compactMap { try $0.data(as: Appointment.self) }
+    }
     
     // Function to fetch all appointments
     func fetchAppointments() async throws -> [Appointment] {
@@ -67,7 +81,6 @@ final class ChartManager {
 }
 
 extension ChartManager {
-    
     func getNext7DaysEarnings(_ appts: [Appointment]) -> Double {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())

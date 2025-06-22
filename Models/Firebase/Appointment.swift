@@ -9,8 +9,8 @@ import FirebaseFirestore
 
 struct Appointment: FirebaseModel {
     @DocumentID var id: String?
-    let name: String
-    let description: String
+    var name: String
+    var description: String
     let amount: Double
     var date: Date // Just date, no time component
     var time: Date  // Timestamp with full date+time

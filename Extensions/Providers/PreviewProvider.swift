@@ -17,6 +17,7 @@ class DeveloperPreview {
     static let instance = DeveloperPreview()
     private init() { }
     
+    let appt1 = Appointment(name: "Lebron", description: "Bald cut", amount: 15, date: Date(), time: Date())
     let calender = Calender(day: 2, date: Date())
     let client = Client(name: "Kobe", phoneNumber: "07800000000", note: nil, isFavourite: true)
     let service1 = Service(title: "Haircut", price: 20.00)

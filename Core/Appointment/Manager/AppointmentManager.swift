@@ -13,6 +13,8 @@ class AppointmentManager {
     static let shared = AppointmentManager()
     let firebaseManager = FirebaseManager.shared
     
+    private let apptCollection = "appointments"
+    
     private init() { }
     
     let timeFormatter: DateFormatter = {
@@ -24,7 +26,39 @@ class AppointmentManager {
     // Book appointment and store to firestore collection
     func book(userId: String, name: String, description: String, for date: Date, time: Date, service: Service?) async throws {
         let appt = Appointment(name: name, description: service?.title ?? "", amount: service?.price ?? 0, date: Calendar.current.startOfDay(for: time), time: time)
-        try await firebaseManager.create(appt, userId: userId, collectionPath: "appointments")
+        try await firebaseManager.create(appt, userId: userId, collectionPath: apptCollection)
+    }
+    
+    // Fetch appointments to display for day view
+    func getAppointments(for date: Date) async throws -> [Appointment] {
+        guard let uid = Auth.auth().currentUser?.uid else { return [] }
+        // Start and end of the day
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: date)
+        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+        
+        let snapshot = try await FirebaseConstants.collectionPath(userId: uid, collectionId: apptCollection)
+            .whereField(Appointment.CodingKeys.date.rawValue, isGreaterThanOrEqualTo: startOfDay)
+            .whereField(Appointment.CodingKeys.date.rawValue, isLessThan: endOfDay)
+            .order(by: Appointment.CodingKeys.date.rawValue)
+            .getDocuments()
+        return try snapshot.documents.compactMap { try $0.data(as: Appointment.self) }
+    }
+    
+    func fetchAppointmentsForEarnings(value: Int) async throws -> [Appointment] {
+        guard let uid = Auth.auth().currentUser?.uid else { return [] }
+        
+        let calendar = Calendar.current
+        let dateRange = calendar.date(byAdding: .day, value: value, to: Date()) ?? Date()
+        
+        let querySnapshot = try await  FirebaseConstants.userDocument(userId: uid).collection(apptCollection)
+            .whereField("date", isGreaterThanOrEqualTo: dateRange)
+            .order(by: "date", descending: true)
+            .getDocuments()
+        
+        return try querySnapshot.documents.compactMap { doc in
+            try doc.data(as: Appointment.self)
+        }
     }
     
     // Fetch booked time slots to remove from appts array

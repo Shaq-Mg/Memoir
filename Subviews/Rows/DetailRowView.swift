@@ -15,7 +15,7 @@ struct DetailRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
-                .font(.callout).bold()
+                .font(.footnote).bold()
             TextField(placeholder, text: $text)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .autocapitalization(.none)

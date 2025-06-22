@@ -19,11 +19,6 @@ class ClientDetailViewModel: ObservableObject {
     
     private let firebaseManager = FirebaseManager.shared
     
-    var isValid: Bool {
-        return !name.isEmpty && !phoneNumber.isEmpty
-        && name.count >= 2 && phoneNumber.count == 11
-    }
-    
     init() {
         clearInformation()
     }

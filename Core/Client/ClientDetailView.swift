@@ -10,14 +10,22 @@ struct ClientDetailView: View {
     @StateObject private var vm = ClientDetailViewModel()
     @EnvironmentObject private var clientVM: ClientViewModel
     @Environment(\.dismiss) private var dismiss
-    let client: Client
+    @State private var clientDidChange = false
+    @State private var showExitConfirmation = false
+    @State private var client: Client
+    private let originalClient: Client
+    
+    init(client: Client) {
+        _client = State(initialValue: client)
+        self.originalClient = client
+    }
     
     var body: some View {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 18) {
-                    DetailRowView(title: "Name", placeholder: client.name, text: $vm.name)
-                    DetailRowView(title: "Phone Number", placeholder: String(client.phoneNumber), text: $vm.phoneNumber)
+                    DetailRowView(title: "Name", placeholder: client.name, text: $client.name)
+                    DetailRowView(title: "Phone Number", placeholder: String(client.phoneNumber), text: $client.phoneNumber)
                     DetailRowView(title: "Note", placeholder: client.note ?? "n/a", text: $vm.note)
                     
                     isFavouriteButton
@@ -26,26 +34,29 @@ struct ClientDetailView: View {
                 .padding(.top, 36)
             }
             
-            Button(action: {
+            Button {
                 Task { try await vm.delete(clientToDelete: client) }
                 Task { try await clientVM.fetch() }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    dismiss()
-                }
-            }, label: {
+                dismiss()
+            } label: {
                 Label("Delete", systemImage: "trash")
                     .font(.headline)
                     .foregroundStyle(.accent)
-            })
+            }
         }
         .navigationTitle(client.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .onAppear { Task { try await vm.load(type: client) } }
+        .alert("Unsaved Changes", isPresented: $showExitConfirmation, actions: {
+            Button("Stay", role: .cancel) { }
+            Button("Discard Changes", role: .destructive) { dismiss() }
+        }, message: {
+            Text("Are you sure you want to discard unsaved changes?")
+        })
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                CancelButtonView(fontSize: .headline, fontColor: Color(.darkGray))
-                    .foregroundStyle(Color(.label))
+                cancelButton
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -57,9 +68,12 @@ struct ClientDetailView: View {
                         .font(.headline)
                         .foregroundStyle(Color(.label))
                 }
-                .disabled(!vm.isValid)
-                .opacity(vm.isValid ? 1.0 : 0.4)
+                .disabled(!clientDidChange)
+                .opacity(clientDidChange ? 1.0 : 0.5)
             }
+        }
+        .onChange(of: client) { oldValue, newValue in
+            clientDidChange = newValue != originalClient
         }
     }
 }
@@ -72,6 +86,20 @@ struct ClientDetailView: View {
 }
 
 extension ClientDetailView {
+    private var cancelButton: some View {
+        Button {
+            if clientDidChange {
+                showExitConfirmation = true
+            } else {
+                dismiss()
+            }
+        } label: {
+            Text("Cancel")
+                .font(.headline)
+                .foregroundStyle(Color(.label))
+        }
+    }
+    
     private var isFavouriteButton: some View {
         VStack(alignment: .leading) {
             Text("Favourite?")

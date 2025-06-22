@@ -26,7 +26,7 @@ struct ClientFormView: View {
         .navigationTitle("Add Client")
         .navigationBarTitleDisplayMode(.inline)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .presentationDetents([.height(400)])
+        .presentationDetents([.fraction(0.4)])
         .padding(.horizontal)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

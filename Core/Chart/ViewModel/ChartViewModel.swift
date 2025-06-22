@@ -10,6 +10,7 @@ import Foundation
 @MainActor
 final class ChartViewModel: ObservableObject {
     @Published var appointments = [Appointment]()
+    @Published var upcomingAppts = [Appointment]()
     @Published var rawSelectedDate: Date?
     
     var selectedDate: Appointment? {
@@ -23,12 +24,9 @@ final class ChartViewModel: ObservableObject {
         chartManager.fetchPreviousAppts(appointments)
     }
     
-    private let chartManager: ChartManager
+    private let chartManager = ChartManager.shared
     
-    init(chartManager: ChartManager) {
-        self.chartManager = chartManager
-        Task { try await fetchAppointments() }
-    }
+    init() { Task { try await fetchAppointments() } }
     
     // Fetch appointments to update array for chart UI
     private func fetchAppointments() async throws {
@@ -39,8 +37,13 @@ final class ChartViewModel: ObservableObject {
         }
     }
     
+    // Fetch upcoming appointments for chart view
+    func fetchUpcomingAppointments() {
+        Task { self.upcomingAppts = try await chartManager.getUpcomingAppts() }
+    }
+    
     // Function to group appointments by day and calculate daily counts
-    func fetchUpcomingAppts(from startDate: Date) -> [(date: Date, count: Int, earnings: Double)] {
+    func fetchDailyChartAppts(from startDate: Date) -> [(date: Date, count: Int, earnings: Double)] {
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: startDate)
         

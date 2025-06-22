@@ -27,7 +27,7 @@ struct Next7Days: View {
                         }
                 }
                 
-                ForEach(vm.fetchUpcomingAppts(from: startDate), id: \.date) { appt in
+                ForEach(vm.fetchDailyChartAppts(from: startDate), id: \.date) { appt in
                     BarMark(
                         x: .value("Date", appt.date, unit: .day),
                         y: .value("Appointment", appt.count)
@@ -50,8 +50,7 @@ struct Next7Days: View {
 }
 
 #Preview {
-    let chartManager = ChartManager()
     Next7Days(chartState: .constant(.next7Days), selectedOption: .constant(.next7Days))
-        .environmentObject(ChartViewModel(chartManager: chartManager))
+        .environmentObject(ChartViewModel())
 }
 

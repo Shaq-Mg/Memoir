@@ -15,20 +15,23 @@ struct InputView: View {
     var isNote = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 6) {
             if isDecimal {
                 Text(title)
+                    .font(.footnote)
                     .fontWeight(.semibold)
                 TextField(placeholder, text: $text)
                     .keyboardType(.decimalPad)
                 Divider()
             } else if isNote {
                 Text(title)
+                    .font(.footnote)
                     .fontWeight(.semibold)
                 TextField(placeholder, text: $text, axis: .vertical)
                 Divider()
             } else {
                 Text(title)
+                    .font(.footnote)
                     .fontWeight(.semibold)
                 TextField(placeholder, text: $text)
             }
