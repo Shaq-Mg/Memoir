@@ -1,5 +1,5 @@
 //
-//  CircularProfileView.swift
+//  CircularProfileImageView.swift
 //  Memoir
 //
 //  Created by Shaquille McGregor on 11/05/2025.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct CircularProfileView: View {
+struct CircularProfileImageView: View {
     let user: User?
     let size: ProfileImageSize
     
@@ -27,5 +27,5 @@ struct CircularProfileView: View {
 }
 
 #Preview {
-    CircularProfileView(user: Preview.dev.user, size: .medium)
+    CircularProfileImageView(user: Preview.dev.user, size: .medium)
 }
