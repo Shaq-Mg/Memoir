@@ -26,4 +26,16 @@ class UserService {
         
         print("DEBUG: Successfully fetched current user \(user)")
     }
+    
+    func reset() {
+        currentUser = nil
+    }
+    
+    func updateUserProfileImage(withImageUrl imageUrl: String) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        try await FirebaseConstants.userDocument(userId: uid).updateData([
+            User.CodingKeys.profileImageUrl.rawValue: imageUrl
+        ])
+        currentUser?.profileImageUrl = imageUrl
+    }
 }

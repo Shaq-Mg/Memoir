@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct SideMenuHeader: View {
+    @EnvironmentObject private var vm: MenuViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationLink {
+            
+        } label: {
+            VStack {
+                HStack(spacing: 6) {
+                    Image(systemName: "person.circle")
+                        .font(.system(size: 32))
+                        .foregroundStyle(Color(.systemGray3))
+                    
+                    Text(vm.currentUser?.email ?? "user")
+                        .font(.headline)
+                        .foregroundStyle(Color(.label))
+                    Spacer()
+                }
+                Divider()
+            }
+        }
     }
 }
 
 #Preview {
     SideMenuHeader()
+        .environmentObject(MenuViewModel())
 }

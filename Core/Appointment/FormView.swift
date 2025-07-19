@@ -59,7 +59,7 @@ struct FormView: View {
                         .environmentObject(vm)
                 }
             }
-            .alert("Confirm Appointment", isPresented: $vm.showConfirmationAlert, actions: {
+            .alert("Confirm Appointment", isPresented: $vm.showConfirmation, actions: {
                 Button("Cancel", role: .destructive) { }
                 Button("Book") {
                     Task { try await vm.bookAppointments(for: currentDate) }
@@ -83,7 +83,7 @@ private extension FormView {
     
     private var confirmButton: some View {
         Button("Confirm") {
-            vm.showConfirmationAlert.toggle()
+            vm.showConfirmation.toggle()
         }
         .foregroundStyle(Color(.white))
         .font(.headline)

@@ -40,6 +40,19 @@ class AuthService {
         }
     }
     
+    func deleteAccount() async throws {
+        do {
+            guard let user = Auth.auth().currentUser else { return }
+            let uid = user.uid
+            // Step 1: Delete user document from Firestore
+            try await FirebaseConstants.userDocument(userId: uid).delete()
+            // Step 2: Delete user authentication account
+            try await user.delete()
+        } catch {
+            print("DEBUG: Failed to delete account from firestore. \(error.localizedDescription)")
+        }
+    }
+    
     func signOut() {
         try? Auth.auth().signOut()
         userSession = nil

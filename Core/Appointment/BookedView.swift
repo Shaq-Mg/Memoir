@@ -25,7 +25,7 @@ struct BookedView: View {
                 .padding(.horizontal)
             }
         }
-        .navigationTitle("Booking 📆")
+        .navigationTitle("Booked")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

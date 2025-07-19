@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct SettingsLabelView: View {
+    let title: String
+    let imageName: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(alignment: .center, spacing: 12) {
+            Image(systemName: imageName)
+                .foregroundStyle(.accent)
+            Text(title)
+                .foregroundStyle(Color(.label))
+            Spacer()
+            Image(systemName: "chevron.right")
+                .foregroundColor(Color(.systemGray4))
+        }
+        .font(.headline)
+        .padding(.vertical, 10)
     }
 }
 
 #Preview {
-    SettingsLabelView()
+    SettingsLabelView(title: "Notifications", imageName: "bell.badge")
 }

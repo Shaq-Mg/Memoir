@@ -5,22 +5,36 @@
 //  Created by Shaquille McGregor on 11/05/2025.
 //
 
-import Combine
+import SwiftUI
 import FirebaseAuth
+import PhotosUI
 
+@MainActor
 class EditProfileViewModel: ObservableObject {
-    @Published var currentUser: User?
+    @Published var profileImage: Image?
+    @Published var selectedItem: PhotosPickerItem? {
+        didSet { Task { await loadImage() } }
+    }
+    @Published var uiImage: UIImage?
     
     private let userService = UserService.shared
-    private var cancellables = Set<AnyCancellable>()
     
-    init() {
-        setUpSubscribers()
+    func updateUserData() async throws {
+        try await uploadProfileImage()
     }
     
-    func setUpSubscribers() {
-        userService.$currentUser.sink { [weak self] currentUser in
-            self?.currentUser = currentUser
-        }.store(in: &cancellables)
+    private func loadImage() async {
+        guard let item = selectedItem else { return }
+        
+        guard let data = try? await item.loadTransferable(type: Data.self) else { return }
+        guard let uiImage = UIImage(data: data) else { return }
+        self.uiImage = uiImage
+        self.profileImage = Image(uiImage: uiImage)
+    }
+    
+    private func uploadProfileImage() async throws {
+        guard let image = self.uiImage else { return }
+        guard let imageUrl = try? await ImageUploader.uploadImage(image) else { return }
+        try await userService.updateUserProfileImage(withImageUrl: imageUrl)
     }
 }

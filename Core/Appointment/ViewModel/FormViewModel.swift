@@ -17,7 +17,7 @@ final class FormViewModel: ObservableObject {
     @Published var name = ""
     @Published var selectedSerivce: Service? = nil
     @Published var bookedAppt: Appointment? // Booked appt tot display in booked view
-    @Published var showConfirmationAlert = false
+    @Published var showConfirmation = false
     
     var formValidation: Bool {
         return !name.isEmpty && selectedTime != nil && selectedSerivce != nil

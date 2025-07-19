@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct SettingsButtonView: View {
+    let title: String
+    let imageName: String
+    let action: ()->()?
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            action()
+        } label: {
+            HStack(alignment: .center, spacing: 12) {
+                Image(systemName: imageName)
+                    .foregroundStyle(.accent)
+                Text(title)
+            }
+            .font(.headline)
+            .padding(.vertical, 10)
+            .foregroundStyle(Color(.label))
+        }
     }
 }
 
 #Preview {
-    SettingsButtonView()
+    SettingsButtonView(title: "Email", imageName: "envelope", action: { })
 }
